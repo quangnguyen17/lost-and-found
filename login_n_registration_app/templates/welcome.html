@@ -4,54 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
     {% load static %}
-
+    <link rel="stylesheet" href="{% static 'welcome.css' %}">
     <title>Lost&Found</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
-
-        * {
-            font-family: 'Questrial', sans-serif;
-        }
-
-        .align-items-center {
-            -ms-flex-align: center !important;
-            align-items: center !important;
-            display: flex;
-            justify-content: center;
-        }
-
-        .text-box {
-            position: absolute;
-            top: 20px;
-            left: 24px;
-        }
-
-        #just-text {
-            position: absolute;
-            left: 24px;
-            bottom: 14px;
-        }
-
-        .h-full {
-            height: 100vh;
-        }
-
-        .bg-trans {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-    </style>
 </head>
 
 <body>
     <div class="container-fluid m-0 p-0">
         <div class="row m-0 p-0">
-            <div class="col-md-6 col-sm-12 bg-light h-full p-0 m-0 text-center align-items-center">
+            <div class="col-md-5 col-sm-12 bg-light h-full p-0 m-0 text-center align-items-center">
                 <ul class="list-inline w-75">
                     <li>
                         <h1 class="font-weight-bold">Lost&Found</h1>
@@ -69,7 +34,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-6 col-sm-12 h-full p-0 py-md-0 py-sm-5 m-0 text-center align-items-center">
+            <div class="col-md-7 col-sm-12 h-full p-0 m-0 text-center align-items-center">
                 <ul class="list-inline text-center w-75">
                     <li>
                         {% if messages %}
@@ -83,28 +48,28 @@
                     <li>
                         <form action="login" method="POST" class="text-center">
                             {% csrf_token %}
-                            <h3>Welcome, Sign In!</h3>
-                            <input name="email" type="email" class="form-control p-4 rounded-0 my-2" placeholder="Email"
+                            <h2 class="mb-3">Welcome, Sign In!</h2>
+                            <input name="email" type="email" class="form-control p-4 rounded-0 my-1" placeholder="Email"
                                 required>
-                            <input name="password" type="password" class="form-control p-4 rounded-0 mt-3"
+                            <input name="password" type="password" class="form-control p-4 rounded-0 my-1"
                                 placeholder="Password" required>
-                            <input type="submit" class="btn btn-secondary px-4 py-2 rounded-0 mt-2" name="login"
+                            <input type="submit" class="btn btn-secondary px-4 py-2 rounded-0 mt-3" name="login"
                                 value="Sign In">
                         </form>
                     </li>
                     <li>
                         <form action="register" method="POST" class="text-center mx-auto mt-5">
                             {% csrf_token %}
-                            <h5><span class="text-secondary">Don't have an account?</span> Sign Up.</h5>
-                            <input name="name" type="text" class="form-control p-4 rounded-0 mt-3" placeholder="Name"
+                            <h5 class="mb-3"><span class="text-secondary">Don't have an account?</span> Sign Up.</h5>
+                            <input name="name" type="text" class="form-control p-4 my-1 rounded-0" placeholder="Name"
                                 required>
-                            <input name="email" type="email" class="form-control p-4 my-2 rounded-0" placeholder="Email"
+                            <input name="email" type="email" class="form-control p-4 my-1 rounded-0" placeholder="Email"
                                 required>
-                            <input name="password" type="password" class="form-control p-4 rounded-0"
+                            <input name="password" type="password" class="form-control p-4 rounded-0 my-1"
                                 placeholder="Password" required>
-                            <input name="confirm_pw" type="password" class="form-control p-4 my-2 rounded-0"
+                            <input name="confirm_pw" type="password" class="form-control p-4 my-1 rounded-0"
                                 placeholder="Confirm Password" required>
-                            <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-4"
+                            <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-3"
                                 name="register" value="Sign Up">
                         </form>
                     </li>

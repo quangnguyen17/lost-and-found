@@ -11,8 +11,8 @@ class ItemManager(models.Manager):
             errors['name'] = "Item's name must be longer than 3 characters"
 
         # POST['desc']
-        if len(POST['desc']) < 10:
-            errors['desc'] = "Item's description must be longer than 10 characters"
+        if len(POST['desc']) < 5:
+            errors['desc'] = "Item's description must be longer than 5 characters"
 
         # FILES['image']
         image_extension = self.get_ext(FILES['image'].name)

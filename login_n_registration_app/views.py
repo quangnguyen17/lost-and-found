@@ -6,36 +6,35 @@ import bcrypt
 
 
 class LoginRegistration(View):
-    def user_logged_in(self, request):
+    def get(self, request):
         if 'user_id' in request.session:
             if request.session['user_id'] != None:
-                return True
+                return redirect("/")
 
-        return False
-
-    def get(self, request):
-        return redirect("/") if self.user_logged_in(request) else render(request, 'welcome.html')
+        return render(request, 'welcome.html')
 
     def post(self, request):
+        user_manager = User.objects
+
         if 'register' in request.POST:
-            errors = User.objects.register_validator(request.POST)
+            errors = user_manager.register_validator(request.POST)
             password = bcrypt.hashpw(
                 request.POST['password'].encode(), bcrypt.gensalt()).decode()
 
             if len(errors) > 0:
                 return render(request, 'welcome.html', {'messages': errors.values()})
 
-            user = User.objects.create(
+            user = user_manager.create(
                 name=request.POST['name'], email=request.POST['email'], password=password)
             request.session['user_id'] = user.id
             return redirect("/")
 
         if 'login' in request.POST:
-            errors = User.objects.login_validator(request.POST)
+            errors = user_manager.login_validator(request.POST)
             if len(errors) > 0:
                 return render(request, 'welcome.html', {'messages': errors.values()})
 
-            for user in User.objects.all():
+            for user in user_manager.all():
                 password_matched = bcrypt.checkpw(
                     request.POST['password'].encode(), user.password.encode())
                 if password_matched and (user.email == request.POST['email']):

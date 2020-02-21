@@ -11,7 +11,7 @@
     {% bootstrap_messages %}
     {% load static %}
 
-    <title>Lost&Found, Welcome!</title>
+    <title>Lost&Found</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 
@@ -50,64 +50,65 @@
 
 <body>
     <div class="container-fluid m-0 p-0">
-        <div class="row justify-content-center">
-            <div class="col-lg-5 col-sm-12 h-full bg-light text-center align-items-center">
-                {% if messages %}
-                <ul class="messages m-5 position-absolute text-center text-danger list-inline">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                        {{ message }}
+        <div class="row m-0 p-0">
+            <div class="col-md-6 col-sm-12 bg-light h-full p-0 m-0 text-center align-items-center">
+                <ul class="list-inline w-75">
+                    <li>
+                        <h1 class="font-weight-bold">Lost&Found</h1>
+                        <p>Powered by Coding Dojo</p>
                     </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                <div class="sign-in-form w-75">
-                    <h1 class="font-weight-bold mb-5">Lost&Found</h1>
-                    <form action="login" method="POST" class="text-center mx-auto">
-                        {% csrf_token %}
-                        <input name="email" type="email" class="form-control p-4 mb-3 rounded-0" placeholder="Email"
-                            required>
-                        <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
-                            required>
-                        <input type="submit" class="btn btn-success d-block px-4 mt-5 mx-auto rounded-0" name="login"
-                            value="Sign In">
-                    </form>
-
-                    <p class="mt-5">"A missing item finder app that will help users find their glasses, keys, wallet,
-                        socks and other
-                        items that they put somewhere and then forget where they actually placed them. One way to do
-                        this is
+                    <li class="my-5">
+                        "A missing item finder app that will help users find their glasses, keys, wallet, socks and
+                        other items that they put somewhere and then forget where they actually placed them. One way to
+                        do this is
                         taking a pic with your phone each time you place such an item so that you can look at the pic if
-                        you
-                        forget about it later."</p>
-                </div>
-            </div>
-            <div class="col-lg-7 col-sm-12 p-0 m-0 h-full text-left align-items-center">
-                {% if messages %}
-                <ul class="messages m-0 text-center text-danger list-inline">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                    {% endfor %}
+                        you forget about it later."
+                    </li>
+                    <li>
+                        <img class="text-center img-fluid" src="{% static 'forget-things.gif' %}" alt="">
+                    </li>
                 </ul>
-                {% endif %}
-                <div class="sign-in-form w-75 text-center">
-                    <img class="mb-5 text-center" width="360" height="180" src="{% static 'forget-things.gif' %}"
-                        alt="">
-                    <h1 class="font-weight-bold mb-5">Welcome! Sign Up</h1>
-                    <form action="register" method="POST" class="text-center mx-auto">
-                        {% csrf_token %}
-                        <input name="name" type="text" class="form-control p-4 mb-3 rounded-0" placeholder="Name"
-                            required>
-                        <input name="email" type="email" class="form-control p-4 mb-3 rounded-0" placeholder="Email"
-                            required>
-                        <input name="password" type="password" class="form-control p-4 mb-3 rounded-0"
-                            placeholder="Password" required>
-                        <input name="confirm_pw" type="password" class="form-control p-4 rounded-0"
-                            placeholder="Confirm Password" required>
-                        <input type="submit" class="btn btn-warning d-block px-4 mt-5 mx-auto rounded-0" name="register"
-                            value="Sign Up">
-                    </form>
-                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 h-full p-0 m-0 text-center align-items-center">
+                <ul class="list-inline text-center w-75">
+                    <li>
+                        {% if messages %}
+                        <ul class="messages m-0 text-center text-danger list-inline">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <form action="login" method="POST" class="text-center">
+                            {% csrf_token %}
+                            <h4>Welcome, Sign In!</h4>
+                            <input name="password" type="password" class="form-control p-4 rounded-0 mt-3"
+                                placeholder="Password" required>
+                            <input name="email" type="email" class="form-control p-4 rounded-0 my-2" placeholder="Email"
+                                required>
+                            <input type="submit" class="btn btn-secondary px-4 py-2 rounded-0 mt-2" name="login"
+                                value="Sign In">
+                        </form>
+                    </li>
+                    <li>
+                        <form action="register" method="POST" class="text-center mx-auto mt-5">
+                            {% csrf_token %}
+                            <h5><span class="text-secondary">Don't have an account?</span> Sign Up.</h5>
+                            <input name="name" type="text" class="form-control p-4 rounded-0 mt-3" placeholder="Name"
+                                required>
+                            <input name="email" type="email" class="form-control p-4 my-2 rounded-0" placeholder="Email"
+                                required>
+                            <input name="password" type="password" class="form-control p-4 rounded-0"
+                                placeholder="Password" required>
+                            <input name="confirm_pw" type="password" class="form-control p-4 my-2 rounded-0"
+                                placeholder="Confirm Password" required>
+                            <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-4"
+                                name="register" value="Sign Up">
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

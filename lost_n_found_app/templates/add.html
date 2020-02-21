@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Add Items</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+        <a class="navbar-brand font-weight-bold" href="home">Lost&Found</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light text-dark rounded-0 mx-2" href="/home">#back</a>
+                </li>
+            </ul>
+        </div>
+
+        {% if user != None %}
+        <a class="text-secondary">{{ user.name }}</a>
+        <a class="btn btn-warning ml-3 rounded-0" href="/home/logout">Log Out</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8 col-sm-12 p-5 bg-light text-center more-rounded">
+                <h1 class="text-danger">Report Missing Item!</h1>
+                <form class="add-form text-center justify-content-center" action="/add_item" method="POST"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="form-control my-3 rounded-0" aria-describedby="emailHelp"
+                        placeholder="Name" name="name" required>
+                    <input type="text" class="form-control my-3 rounded-0" placeholder="Description" name="desc"
+                        required>
+                    <div class="form-group my-4">
+                        <label for="exampleFormControlFile1">Upload an image for your item!</label>
+                        <input type="file" class="form-control-file" name="image" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary rounded-0">Add Item</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

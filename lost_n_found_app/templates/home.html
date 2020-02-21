@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    {% load static %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/8199b614e7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Lost&Found - Home</title>
+    <script>
+        $(document).ready(function () {
+            $('.found-section').hide();
+
+            $('.type').on('click', function (event) {
+                id = $(event.target).parent().attr('id');
+
+                if ($(`#${id}`).hasClass('active')) {
+                    return;
+                }
+
+                if (id === "found-btn") {
+                    $(`#${id}`).addClass('active');
+                    $('#lost-btn').removeClass('active');
+                    $('.found-section').show();
+                    $('.lost-section').hide();
+                } else {
+                    $(`#${id}`).addClass('active');
+                    $('#found-btn').removeClass('active');
+                    $('.found-section').hide();
+                    $('.lost-section').show();
+                }
+            });
+        });
+
+        function showAll() {
+            window.location.href = "/home/all"
+        };
+
+        function showMine() {
+            window.location.href = "/home/mine"
+        };
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+        <a class="navbar-brand font-weight-bold" href="home">Lost&Found</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light text-dark rounded-0 mx-2"
+                        href="{% if keyword != None %} add {% else %} /home/add {% endif %}">#add-item</a>
+                </li>
+            </ul>
+        </div>
+
+        {% if user != None %}
+        <a class="text-secondary">{{ user.name }}</a>
+        <a class="btn btn-warning ml-3 rounded-0" href="/home/logout">Log Out</a>
+        {% endif %}
+    </nav>
+    <div class="container-fluid">
+        <div class="row p-5 text-center">
+            <div class="col">
+                <div class="btn-group" role="group" aria-label="">
+                    <button id="lost-btn" type="button" class="btn btn-light py-3 px-4 active rounded-0 type">
+                        <h3 class="m-0">#missing ({{ lost_items|length }})</h3>
+                    </button>
+                    <button id="found-btn" type="button" class="btn btn-light py-3 px-4 rounded-0 type">
+                        <h3 class="m-0">#found ({{ found_items|length }})</h3>
+                    </button>
+                </div>
+                <br>
+                <div class="btn-group mt-3" role="group" aria-label="">
+                    <button onclick="showAll()" type="button" class="btn btn-outline-secondary rounded-0 type 
+                    {% if keyword == "all" %}
+                    active
+                    {% endif %}">
+                        <p class="m-0">All</p>
+                    </button>
+                    <button onclick="showMine()" type="button" class="btn btn-outline-secondary rounded-0 type
+                    {% if keyword == "mine" %}
+                    active
+                    {% endif %}">
+                        <p class="m-0">My Items Only</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row px-5 lost-section">
+            {% for item in lost_items %}
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 fade-in">
+                <div class="w-100 py-0">
+                    <img class="img-fluid bg-light sized w-100" src="{{ item.image.url }}" alt="">
+                    <div class="container-fluid p-0 m-0">
+                        <div class="row align-items-start m-0 pt-3">
+                            <div class="col-6 p-0 text-left">
+                                <button class="btn btn-sm btn-secondary mb-2 rounded-0">{{ item.owner.name }}</button>
+                                <h2 class="wrapped-text m-0">{{ item.name }}</h2>
+                                <p class="text-secondary wrapped-text">{{ item.desc }}</p>
+                            </div>
+                            <div class="col-6 p-0 text-right">
+                                <a href="{% if keyword != None %}/{% else %}{% endif %}found_item/{{ item.id }}"
+                                    class="btn btn-outline-success rounded-0">Found</a><br>
+                                {% if item.owner.id == user.id %}
+                                <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
+                                    class="btn btn-outline-danger rounded-0 mt-1"><i class="far fa-trash-alt"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row px-5 mb-5 found-section">
+            {% for item in found_items %}
+            <div class="col-lg-4 col-md-6 col-sm-12 p-3 fade-in">
+                <div class="w-100 py-0">
+                    <img class="img-fluid bg-secondary sized w-100" src="{{ item.image.url }}" alt="">
+                    <div class="container-fluid p-0 m-0">
+                        <div class="row align-items-start m-0 pt-3">
+                            <div class="col-8 p-0 text-left">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a class="btn btn-sm btn-secondary rounded-0 mb-1 mr-1"
+                                            href="#">{{ item.owner.name }}</a>
+                                    </li>
+                                    <li>
+                                        Found By <a class="btn btn-sm btn-success ml-1 rounded-0"
+                                            href="#">{{ item.found_by_whom.name }}</a>
+                                    </li>
+                                </ul>
+                                <h2 class="wrapped-text m-0">{{ item.name }}</h2>
+                                <p class="text-secondary wrapped-text">{{ item.desc }}</p>
+                            </div>
+                            <div class="col-4 p-0 text-right">
+                                {% if item.found_by_whom.id == user.id %}
+                                <a href="{% if keyword != None %}/{% else %}{% endif %}unfound_item/{{ item.id }}"
+                                    class="btn btn-outline-success rounded-0">Unfound</a><br>
+                                {% endif %}
+                                {% if item.owner.id == user.id %}
+                                <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
+                                    class="btn btn-outline-danger rounded-0 mt-1"><i class="far fa-trash-alt"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

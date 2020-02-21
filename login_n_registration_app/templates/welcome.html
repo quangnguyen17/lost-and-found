@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {% bootstrap_messages %}
+    {% load static %}
+
+    <title>Doogy! - Welcome</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+        * {
+            font-family: 'Questrial', sans-serif;
+        }
+
+        .align-items-center {
+            -ms-flex-align: center !important;
+            align-items: center !important;
+            display: flex;
+            justify-content: center;
+        }
+
+        .text-box {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+        }
+
+        #just-text {
+            position: absolute;
+            left: 24px;
+            bottom: 14px;
+        }
+
+        .h-full {
+            height: 100vh;
+        }
+
+        .bg-trans {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-sm-12 h-full bg-light text-center align-items-center">
+                {% if messages %}
+                <ul class="messages m-5 position-absolute text-center text-danger list-inline">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{ message }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <h3 class="text-box font-weight-bold d-inline-block">Lost&Found</h3>
+                <div class="sign-in-form w-75">
+                    <h1 class="font-weight-bold mb-5">Sign In</h1>
+                    <form action="login" method="POST" class="text-center mx-auto">
+                        {% csrf_token %}
+                        <input name="email" type="email" class="form-control p-4 mb-3 rounded-0" placeholder="Email"
+                            required>
+                        <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
+                            required>
+                        <input type="submit" class="btn btn-success d-block px-4 mt-5 mx-auto rounded-0" name="login"
+                            value="Sign In">
+                    </form>
+
+                    <p class="mt-5">"A missing item finder app that will help users find their glasses, keys, wallet,
+                        socks and other
+                        items that they put somewhere and then forget where they actually placed them. One way to do
+                        this is
+                        taking a pic with your phone each time you place such an item so that you can look at the pic if
+                        you
+                        forget about it later."</p>
+                </div>
+            </div>
+            <div class="col-lg-7 col-sm-12 h-full text-left align-items-center">
+                {% if messages %}
+                <ul class="messages m-0 text-center text-danger list-inline">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="sign-in-form w-75 text-center">
+                    <img class="mb-5" width="360" height="180" src="{% static 'forget-things.gif' %}" alt="">
+                    <h1 class="font-weight-bold mb-5">Welcome! Sign Up</h1>
+                    <form action="register" method="POST" class="text-center mx-auto">
+                        {% csrf_token %}
+                        <input name="name" type="text" class="form-control p-4 mb-3 rounded-0" placeholder="Name"
+                            required>
+                        <input name="email" type="email" class="form-control p-4 mb-3 rounded-0" placeholder="Email"
+                            required>
+                        <input name="password" type="password" class="form-control p-4 mb-3 rounded-0"
+                            placeholder="Password" required>
+                        <input name="confirm_pw" type="password" class="form-control p-4 rounded-0"
+                            placeholder="Confirm Password" required>
+                        <input type="submit" class="btn btn-warning d-block px-4 mt-5 mx-auto rounded-0" name="register"
+                            value="Sign Up">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

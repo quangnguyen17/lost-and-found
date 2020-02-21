@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+/* FONTS */
+
+* {
+    font-family: 'Questrial', sans-serif;
+}
+
+.fade-in {
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.sized {
+    height: 300px;
+}
+
+.position-relative {
+    width: 100%;
+    position: relative;
+}
+
+img {
+    object-fit: cover;
+}
+
+.wrapped-text {
+    overflow-wrap: break-word;
+}
+
+.content-right {
+    vertical-align: middle;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

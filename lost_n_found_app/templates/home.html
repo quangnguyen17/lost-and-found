@@ -4,50 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
     {% load static %}
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/8199b614e7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <title>Lost&Found - Home</title>
     <script>
+        function showAll() {
+            window.location.href = "/home/all";
+        };
+
+        function showMine() {
+            window.location.href = "/home/mine";
+        };
+
         $(document).ready(function () {
             $('.found-section').hide();
 
             $('.type').on('click', function (event) {
-                id = $(event.target).parent().attr('id');
-
-                if ($(`#${id}`).hasClass('active')) {
+                if ($(event.target).hasClass('active')) {
                     return;
                 }
 
-                if (id === "found-btn") {
-                    $(`#${id}`).addClass('active');
+                elementID = $(event.target).attr('id');
+
+                if (elementID === "found-btn") {
+                    $(`#${elementID}`).addClass('active');
                     $('#lost-btn').removeClass('active');
                     $('.found-section').show();
                     $('.lost-section').hide();
                 } else {
-                    $(`#${id}`).addClass('active');
+                    $(`#${elementID}`).addClass('active');
                     $('#found-btn').removeClass('active');
                     $('.found-section').hide();
                     $('.lost-section').show();
                 }
             });
         });
-
-        function showAll() {
-            window.location.href = "/home/all"
-        };
-
-        function showMine() {
-            window.location.href = "/home/mine"
-        };
     </script>
+    <title>Lost&Found - Home</title>
 </head>
 
 <body>
@@ -61,7 +59,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center mr-auto">
                 <li class="nav-item ml-3">
-                    <a class="nav-link text-secondary">Welcome, {{ user.name }}!</a>
+                    <a class="nav-link text-secondary">Hi, {{ user.name }}!</a>
                 </li>
             </ul>
         </div>
@@ -78,91 +76,88 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="row p-5 text-center">
-            <div class="col">
-                <div class="btn-group" role="group" aria-label="">
-                    <button id="lost-btn" type="button" class="btn btn-light py-3 px-4 active rounded-0 type">
-                        <h3 class="m-0">#missing ({{ lost_items|length }})</h3>
-                    </button>
-                    <button id="found-btn" type="button" class="btn btn-light py-3 px-4 rounded-0 type">
-                        <h3 class="m-0">#found ({{ found_items|length }})</h3>
-                    </button>
-                </div>
-                <br>
-                <div class="btn-group mt-3" role="group" aria-label="">
-                    <button onclick="showAll()" type="button" class="btn btn-outline-secondary rounded-0 type 
-                    {% if keyword == "all" %}
-                    active
-                    {% endif %}">
-                        <p class="m-0">All</p>
-                    </button>
-                    <button onclick="showMine()" type="button" class="btn btn-outline-secondary rounded-0 type
-                    {% if keyword == "mine" %}
-                    active
-                    {% endif %}">
-                        <p class="m-0">My Items Only</p>
-                    </button>
-                </div>
+        <div class="row py-5 text-center align-items-center">
+            <p class="p-0 m-2">Showing: </p>
+            <div class="btn-group m-1" role="group" aria-label="">
+                <button id="lost-btn" type="button" class="btn btn-light active rounded-0 type">#missing
+                    ({{ lost_items|length }})</button>
+                <button id="found-btn" type="button" class="btn btn-light rounded-0 type">#found
+                    ({{ found_items|length }})</button>
+            </div>
+            <div class="btn-group m-1" role="group" aria-label="">
+                <button onclick="showAll()" type="button" class="btn btn-light rounded-0 type 
+                {% if keyword == "all" %}
+                active
+                {% endif %}">
+                    <p class="m-0">All</p>
+                </button>
+                <button onclick="showMine()" type="button" class="btn btn-light rounded-0 type
+                {% if keyword == "mine" %}
+                active
+                {% endif %}">
+                    <p class="m-0">My Items Only</p>
+                </button>
             </div>
         </div>
-        <div class="row px-5 lost-section">
+        <div class="row p-0 lost-section">
             {% for item in lost_items %}
-            <div class="col-lg-4 col-md-6 col-sm-12 p-sm-0 p-md-2 fade-in">
-                <div class="w-100 py-0">
-                    <img class="img-fluid bg-light sized w-100" src="{{ item.image.url }}" alt="">
-                    <div class="container-fluid p-0 m-0">
-                        <div class="row align-items-start m-0 pt-3">
-                            <div class="col-6 p-0 text-left">
-                                <button class="btn btn-sm btn-secondary mb-2 rounded-0">{{ item.owner.name }}</button>
-                                <h2 class="wrapped-text m-0">{{ item.name }}</h2>
-                                <p class="text-secondary wrapped-text">{{ item.desc }}</p>
-                            </div>
-                            <div class="col-6 p-0 text-right">
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0 fade-in">
+                <div class="image-box" style="background-image: url({{ item.image.url }});">
+                    <div class="content-box text-center text-light align-items-center">
+                        <ul class="list-inline m-0">
+                            <li>
+                                <p class="mb-2">{{ item.owner.name }} posted:</p>
+                            </li>
+                            <li>
+                                <h1 class="m-0">{{ item.name }}</h1>
+                            </li>
+                            <li>
+                                <p class="mb-3">{{ item.desc }}</p>
+                            </li>
+                            <li>
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}found_item/{{ item.id }}"
-                                    class="btn btn-outline-success rounded-0">Found</a><br>
+                                    class="btn btn-success rounded-0">Found</a>
                                 {% if item.owner.id == user.id %}
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
-                                    class="btn btn-outline-danger rounded-0 mt-1"><i class="far fa-trash-alt"></i></a>
+                                    class="btn btn-danger rounded-0"><i class="far fa-trash-alt"></i></a>
                                 {% endif %}
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <div class="row px-5 mb-5 found-section">
+        <div class="row p-0 found-section">
             {% for item in found_items %}
-            <div class="col-lg-4 col-md-6 col-sm-12 p-sm-0 p-md-2 fade-in">
-                <div class="w-100 py-0">
-                    <img class="img-fluid bg-secondary sized w-100" src="{{ item.image.url }}" alt="">
-                    <div class="container-fluid p-0 m-0">
-                        <div class="row align-items-start m-0 pt-3">
-                            <div class="col-8 p-0 text-left">
-                                <ul class="list-inline">
-                                    <li>
-                                        <a class="btn btn-sm btn-secondary rounded-0 mb-1 mr-1"
-                                            href="#">{{ item.owner.name }}</a>
-                                    </li>
-                                    <li>
-                                        Found By <a class="btn btn-sm btn-success ml-1 rounded-0"
-                                            href="#">{{ item.found_by_whom.name }}</a>
-                                    </li>
-                                </ul>
-                                <h2 class="wrapped-text m-0">{{ item.name }}</h2>
-                                <p class="text-secondary wrapped-text">{{ item.desc }}</p>
-                            </div>
-                            <div class="col-4 p-0 text-right">
+            <div class="col-lg-3 col-md-6 col-sm-12 p-0 fade-in">
+                <div class="image-box" style="background-image: url({{ item.image.url }});">
+                    <div class="content-box text-center text-light align-items-center">
+                        <ul class="list-inline m-0">
+                            <li>
+                                <p class="mb-2">{{ item.owner.name }} posted:</p>
+                            </li>
+                            <li>
+                                <h1 class="m-0">{{ item.name }}</h1>
+                            </li>
+                            <li>
+                                <p class="mt-1 mb-3">{{ item.desc }}</p>
+                            </li>
+                            <li>
+                                <p class="bg-success text-light d-inline-block py-1 px-3 mb-1">Found by
+                                    {{ item.found_by_whom.name }}</p>
+                            </li>
+                            <li>
                                 {% if item.found_by_whom.id == user.id %}
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}unfound_item/{{ item.id }}"
-                                    class="btn btn-outline-success rounded-0">Unfound</a><br>
+                                    class="btn btn-warning rounded-0">Unfound</a>
                                 {% endif %}
                                 {% if item.owner.id == user.id %}
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
-                                    class="btn btn-outline-danger rounded-0 mt-1"><i class="far fa-trash-alt"></i></a>
+                                    class="btn btn-danger rounded-0"><i class="far fa-trash-alt"></i></a>
                                 {% endif %}
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

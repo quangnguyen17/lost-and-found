@@ -37,15 +37,6 @@
             <div class="col-md-7 col-sm-12 h-full p-0 m-0 text-center align-items-center">
                 <ul class="list-inline text-center w-75">
                     <li>
-                        {% if messages %}
-                        <ul class="messages m-0 text-center text-danger list-inline">
-                            {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </li>
-                    <li>
                         <form action="login" method="POST" class="text-center">
                             {% csrf_token %}
                             <h2 class="mb-3">Welcome, Sign In!</h2>

@@ -120,5 +120,4 @@ def handle_item(request, item_id, action):
         item.save()
 
     item.delete() if action == "delete" else update()
-
     return redirect("/home")

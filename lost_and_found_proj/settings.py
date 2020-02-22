@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'login_n_registration_app',
     'lost_n_found_app',
     'bootstrap4',
+    'django_unused_media',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

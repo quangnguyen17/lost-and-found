@@ -28,6 +28,10 @@
     height: 100vh;
 }
 
+.w-80 {
+    width: 80%;
+}
+
 .bg-trans {
     background-color: rgba(0, 0, 0, 0.5);
 }

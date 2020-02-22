@@ -11,7 +11,6 @@
     {% bootstrap_messages %}
     {% load static %}
 
-    <script src="https://kit.fontawesome.com/8199b614e7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'home.css' %}">
     <title>Add Items</title>
 </head>
@@ -21,7 +20,7 @@
         <h3 class="m-0 font-weight-bold" href="home">Lost&Found</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-ellipsis-h"></i>
+            <span>•••</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center mr-auto">
@@ -44,29 +43,33 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row mt-5 justify-content-center">
-            <div class="col-md-8 col-sm-12 p-5 bg-light text-center more-rounded">
-                <h1 class="text-danger mb-4">Add Missing Item!</h1>
-                <form class="add-form text-center justify-content-center" action="/add_item" method="POST"
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-sm-12 py-5 px-4 text-center more-rounded">
+                <h1 class="text-danger mb-5">Add Missing Item!</h1>
+                <form class="w-100 text-center justify-content-center" action="/add_item" method="POST"
                     enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="text" class="form-control my-1 p-4 rounded-0" aria-describedby="emailHelp"
                         placeholder="Name" name="name" required>
-                    <small id="nameHelp" class="form-text text-muted mb-3">Item's name must be longer than 3
+                    <small id="nameHelp" class="form-text text-muted mb-3">* Item's name must be longer than 3
                         characters</small>
 
                     <input type="text" class="form-control my-1 p-4 rounded-0" placeholder="Description" name="desc"
                         required>
-                    <small id="descHelp" class="form-text text-muted">Item's description must be longer than 5
+                    <small id="descHelp" class="form-text text-muted">* Item's description must be longer than 5
                         characters</small>
 
                     <div class="form-group my-4">
                         <label for="exampleFormControlFile1">Upload an image for your item!</label>
-                        <input type="file" class="form-control-file" name="image" required>
-                        <small id="descHelp" class="form-text text-muted">Please upload your image in these formats:
+                        <input type="file" class="form-control-file w-75 d-block mx-auto" name="image" required>
+                        <small id="descHelp" class="form-text text-muted mt-2">* Please upload your image in these
+                            formats:
                             JPG, JPEG, PNG, GIF.</small>
                     </div>
-                    <button type="submit" class="btn btn-success rounded-0">Add Item</button>
+                    <button type="submit" class="btn btn-danger rounded-0">
+                        <span class="mr-1">[+]</span>
+                        <span>Add Item</span>
+                    </button>
                 </form>
             </div>
 

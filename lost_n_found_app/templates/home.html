@@ -10,7 +10,6 @@
     {% bootstrap_messages %}
     {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/8199b614e7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'home.css' %}">
     <script>
         function showAll() {
@@ -53,7 +52,7 @@
         <h3 class="m-0 font-weight-bold" href="home">Lost&Found</h3>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-ellipsis-h"></i>
+            <span>•••</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center mr-auto">
@@ -75,7 +74,10 @@
             <ul class="list-inline m-0">
                 <li class="list-inline-item m-1">
                     <a class="btn btn-warning rounded-0 px-3 m-0"
-                        href="{% if keyword != None %} add {% else %} /home/add {% endif %}">Add Item</a>
+                        href="{% if keyword != None %} add {% else %} /home/add {% endif %}">
+                        <span class="mr-1">[+]</span>
+                        <span>Add Item</span>
+                    </a>
                 </li>
                 <li class="list-inline-item m-1">
                     <div class="btn-group m-0" role="group" aria-label="">
@@ -102,10 +104,6 @@
                     </div>
                 </li>
             </ul>
-
-            <!-- <p class="p-0 m-2">Showing: </p> -->
-
-
         </div>
         <div class="row p-0 lost-section">
             {% for item in lost_items %}
@@ -114,7 +112,7 @@
                     <div class="content-box text-center text-light align-items-center">
                         <ul class="list-inline m-0">
                             <li>
-                                <p class="mb-2">{{ item.owner.name }} posted:</p>
+                                <p class="mb-3 py-2 px-3 border border-light">{{ item.owner.name }} posted:</p>
                             </li>
                             <li>
                                 <h1 class="m-0">{{ item.name }}</h1>
@@ -127,7 +125,7 @@
                                     class="btn btn-success rounded-0">Found</a>
                                 {% if item.owner.id == user.id %}
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
-                                    class="btn btn-danger rounded-0"><i class="far fa-trash-alt"></i></a>
+                                    class="btn btn-danger rounded-0">Remove</a>
                                 {% endif %}
                             </li>
                         </ul>
@@ -143,16 +141,16 @@
                     <div class="content-box text-center text-light align-items-center">
                         <ul class="list-inline m-0">
                             <li>
-                                <p class="mb-2">{{ item.owner.name }} posted:</p>
+                                <p class="mb-3 py-2 px-3 border border-light">{{ item.owner.name }} posted:</p>
                             </li>
                             <li>
                                 <h1 class="m-0">{{ item.name }}</h1>
                             </li>
                             <li>
-                                <p class="mt-1 mb-3">{{ item.desc }}</p>
+                                <p class="mb-3">{{ item.desc }}</p>
                             </li>
                             <li>
-                                <p class="bg-success text-light d-inline-block py-1 px-3 mb-1">Found by
+                                <p class="text-success mb-1 py-2 px-3 border border-success">Found by
                                     {{ item.found_by_whom.name }}</p>
                             </li>
                             <li>
@@ -162,7 +160,7 @@
                                 {% endif %}
                                 {% if item.owner.id == user.id %}
                                 <a href="{% if keyword != None %}/{% else %}{% endif %}remove_item/{{ item.id }}"
-                                    class="btn btn-danger rounded-0"><i class="far fa-trash-alt"></i></a>
+                                    class="btn btn-danger rounded-0">Remove</a>
                                 {% endif %}
                             </li>
                         </ul>

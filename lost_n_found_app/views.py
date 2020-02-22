@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import Item
 from login_n_registration_app.models import User
 from django.contrib import messages
+from PIL import Image
+
 
 # USERS AUTH
 

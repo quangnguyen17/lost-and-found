@@ -1,5 +1,28 @@
 from django.db import models
 from login_n_registration_app.models import User
+from io import BytesIO
+from PIL import Image
+from django.core.files import File
+
+
+# image compression method
+def compress(image, image_ext):
+    im = Image.open(image)
+    im_io = BytesIO()
+    im.save(im_io, image_ext, quality=60)
+    new_image = File(im_io, name=image.name)
+    return new_image
+
+
+def get_ext(filename):
+    ext = ''
+    for index in range(len(filename) - 1, -1, -1):
+        char = filename[index]
+        if char == '.':
+            return ''.join(reversed(ext))
+        else:
+            ext += str(char)
+    return ext
 
 
 class ItemManager(models.Manager):

@@ -64,7 +64,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">Log Out</a>
+                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">
+                        <span class="mr-1">[&#88;]</span>
+                        <span>Log Out</span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -73,9 +76,9 @@
         <div class="row p-5 text-center align-items-center">
             <ul class="list-inline m-0">
                 <li class="list-inline-item m-1">
-                    <a class="btn btn-warning rounded-0 px-3 m-0"
+                    <a class="btn btn-warning rounded-0 px-3 py-2 m-0"
                         href="{% if keyword != None %} add {% else %} /home/add {% endif %}">
-                        <span class="mr-1">[+]</span>
+                        <span class="mr-1">[&#43;]</span>
                         <span>Add Item</span>
                     </a>
                 </li>

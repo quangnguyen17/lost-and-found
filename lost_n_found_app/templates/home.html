@@ -51,9 +51,8 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light px-5">
         <h3 class="m-0 font-weight-bold" href="home">Lost&Found</h3>
-        <button class="navbar-toggler mb-md-0 mb-sm-2" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-ellipsis-h"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -66,38 +65,47 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3"
-                        href="{% if keyword != None %} add {% else %} /home/add {% endif %}">Add Item</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-warning rounded-0 px-3" href="/home/logout">Log Out</a>
+                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">Log Out</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container-fluid">
         <div class="row p-5 text-center align-items-center">
-            <p class="p-0 m-2">Showing: </p>
-            <div class="btn-group m-1" role="group" aria-label="">
-                <button id="lost-btn" type="button" class="btn btn-light active rounded-0 type">#missing
-                    ({{ lost_items|length }})</button>
-                <button id="found-btn" type="button" class="btn btn-light rounded-0 type">#found
-                    ({{ found_items|length }})</button>
-            </div>
-            <div class="btn-group m-1" role="group" aria-label="">
-                <button onclick="showAll()" type="button" class="btn btn-light rounded-0 type 
-                {% if keyword == "all" %}
-                active
-                {% endif %}">
-                    <p class="m-0">All</p>
-                </button>
-                <button onclick="showMine()" type="button" class="btn btn-light rounded-0 type
-                {% if keyword == "mine" %}
-                active
-                {% endif %}">
-                    <p class="m-0">My Items Only</p>
-                </button>
-            </div>
+            <ul class="list-inline m-0">
+                <li class="list-inline-item m-1">
+                    <a class="btn btn-warning rounded-0 px-3 m-0"
+                        href="{% if keyword != None %} add {% else %} /home/add {% endif %}">Add Item</a>
+                </li>
+                <li class="list-inline-item m-1">
+                    <div class="btn-group m-0" role="group" aria-label="">
+                        <button id="lost-btn" type="button" class="btn btn-light active rounded-0 type">#missing
+                            ({{ lost_items|length }})</button>
+                        <button id="found-btn" type="button" class="btn btn-light rounded-0 type">#found
+                            ({{ found_items|length }})</button>
+                    </div>
+                </li>
+                <li class="list-inline-item m-1">
+                    <div class="btn-group m-0" role="group" aria-label="">
+                        <button onclick="showAll()" type="button" class="btn btn-light rounded-0 type 
+                        {% if keyword == "all" %}
+                        active
+                        {% endif %}">
+                            <p class="m-0">All</p>
+                        </button>
+                        <button onclick="showMine()" type="button" class="btn btn-light rounded-0 type
+                        {% if keyword == "mine" %}
+                        active
+                        {% endif %}">
+                            <p class="m-0">My Items Only</p>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- <p class="p-0 m-2">Showing: </p> -->
+
+
         </div>
         <div class="row p-0 lost-section">
             {% for item in lost_items %}

@@ -2,7 +2,7 @@ import os
 import sys
 import datetime
 from django.db import models
-from login_n_registration_app.models import User
+from login_n_registration_app.models import User, Campus
 from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -54,10 +54,14 @@ class Item(models.Model):
     desc = models.TextField(blank=True)
     image = models.ImageField(upload_to=path_and_rename, null=True)
     found = models.BooleanField(default=False)
+
     found_by_whom = models.ForeignKey(
         User, related_name="found_items", on_delete=models.CASCADE, null=True)
     owner = models.ForeignKey(
         User, related_name="items", on_delete=models.CASCADE, null=True)
+    campus = models.CharField(max_length=255, choices=[
+                              (tag, tag.value) for tag in Campus], null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = ItemManager()

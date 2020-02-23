@@ -15,8 +15,8 @@
 
 <body>
     <div class="container-fluid m-0 p-0">
-        <div class="row m-0 p-0">
-            <div class="col-md-5 col-sm-12 bg-light h-full p-0 m-0 text-center align-items-center">
+        <div class="row h-full bg-light p-0 m-0">
+            <div class="col-6 text-center align-items-center">
                 <ul class="w-75 list-inline">
                     <li>
                         <h1 class="font-weight-bold">Lost&Found</h1>
@@ -35,38 +35,97 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-7 col-sm-12 h-full p-0 m-0 text-center align-items-center">
-                <ul class="w-75 list-inline text-center p-0 m-0">
+            <div class="col-6 text-center align-items-center">
+                <ul class="list-inline p-0 m-0 w-75">
                     <li>
                         <form action="login" method="POST" class="text-center">
                             {% csrf_token %}
-                            <h2 class="mb-3">Welcome, Sign In!</h2>
+                            <h1 class="mb-5">Welcome, Sign In!</h1>
                             <input name="email" type="email" class="form-control p-4 rounded-0 mb-1" placeholder="Email"
                                 required>
                             <input name="password" type="password" class="form-control p-4 rounded-0"
                                 placeholder="Password" required>
-                            <input type="submit" class="btn btn-secondary px-4 py-2 mt-3 rounded-0" name="login"
+                            <input type="submit" class="btn btn-secondary px-4 py-2 mt-5 rounded-0" name="login"
                                 value="Sign In">
                         </form>
                     </li>
-                    <li>
-                        <form action="register" method="POST" class="text-center mx-auto mt-5">
-                            {% csrf_token %}
-                            <h5 class="mb-3"><span class="text-secondary">Don't have an account?</span> Sign Up.</h5>
-                            <input name="name" type="text" class="form-control p-4 rounded-0" placeholder="Name"
-                                required>
-                            <input name="email" type="email" class="form-control p-4 my-1 rounded-0" placeholder="Email"
-                                required>
-                            <input name="password" type="password" class="form-control p-4 rounded-0 my-1"
-                                placeholder="Password" required>
-                            <input name="confirm_pw" type="password" class="form-control p-4 rounded-0"
-                                placeholder="Confirm Password" required>
-                            <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-3"
-                                name="register" value="Sign Up">
-                        </form>
+                    <li class="mt-5">
+                        <div class="about p-0 m-0">
+                            <p class="m-0 p-0">Go to our site: <a class="text-secondary" href="dojoafterdark.com"
+                                    target="_blank">DojoAfterDark</a></p>
+                            <p class="m-0 p-0">Check us out on <a class="text-secondary"
+                                    href="https://github.com/CBaut/DojoAfterDark" target="_blank">GitHub!</a></p>
+                        </div>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="row h-full m-0 p-0 text-center align-items-center">
+            <form action="register" method="POST" class="text-center w-75" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="mb-3"><span class="text-secondary">Don't have an account?</span> Sign Up.</h1>
+
+                <!-- PROFILE IMAGE -->
+                <div class="form-group my-4 w-75 d-block mx-auto">
+                    <label for="exampleFormControlFile1">Upload your profile image!</label>
+                    <input type="file" class="form-control-file w-75 d-block mx-auto" name="profile_image" required>
+                    <small id="descHelp" class="form-text text-muted mt-2">* Please upload your image in valid formats.
+                        We only support: JPG, JPEG.</small>
+                </div>
+
+                <!-- FIRST NAME, LAST NAME -->
+                <div class="form-row m-0 p-0">
+                    <div class="col-6 p-0 pr-1">
+                        <input name="first_name" type="text" class="form-control p-4 rounded-0" placeholder="First Name"
+                            required>
+                    </div>
+                    <div class="col-6 p-0">
+                        <input name="last_name" type="text" class="form-control p-4 rounded-0" placeholder="Last Name"
+                            required>
+                    </div>
+                </div>
+
+                <!-- EMAIL -->
+                <input name="email" type="email" class="form-control p-4 my-1 rounded-0" placeholder="Email" required>
+
+                <!-- PASSWORD, PASSWORD CONFIRM -->
+                <div class="form-row m-0 p-0">
+                    <div class="col-6 p-0 pr-1">
+                        <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
+                            required>
+                    </div>
+                    <div class="col-6 p-0">
+                        <input name="confirm_pw" type="password" class="form-control p-4 rounded-0"
+                            placeholder="Confirm Password" required>
+                    </div>
+                </div>
+
+                <!-- CAMPUS -->
+                <div class="form-group mt-2 mb-3">
+                    <label class="form-check-label mb-1 text-secondary" for="inlineRadio1">* Select your campus</label>
+                    <select id="select" class="form-control w-75 mx-auto rounded-0" name="campus" required>
+                        {% for campus in campuses %}
+                        <option value="{{ campus }}">{{ campus }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- INSTRUCTOR OR STUDENT -->
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="level" id="inlineRadio1" value="Instructor"
+                        required>
+                    <label class="form-check-label" for="inlineRadio1">Instructor</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="level" id="inlineRadio2" value="Student"
+                        required>
+                    <label class="form-check-label" for="inlineRadio2">Student</label>
+                </div>
+
+                <!-- SUBMIT -->
+                <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-5" name="register"
+                    value="Sign Up">
+            </form>
         </div>
     </div>
 </body>

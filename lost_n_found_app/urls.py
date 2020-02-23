@@ -8,8 +8,6 @@ urlpatterns = [
     path('home', views.home),
     path('home/add', views.add),
     path('home/logout', views.log_out),
-    # /home/
-    path('home/<str:keyword>', views.custom_home),
     # /actions
     path('add_item', views.add_item),
     path('found_item/<int:item_id>', views.found_item),

@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Item
-from login_n_registration_app.models import User
+from login_n_registration_app.models import User, Campus
 from django.contrib import messages
 from PIL import Image
+import enum
 
 
 # USERS AUTH
@@ -31,33 +32,18 @@ def index(request):
 def home(request):
     if user_logged_in(request):
         user_id = request.session['user_id']
-        all_items = Item.objects.all().order_by("-created_at")
-
-        context = {
-            'user': User.objects.all().get(id=user_id),
-            'lost_items': all_items.filter(found=False),
-            'found_items': all_items.filter(found=True),
-        }
-
-        return render(request, 'home.html', context)
-
-    return redirect("/welcome")
-
-
-def custom_home(request, keyword):
-    if user_logged_in(request):
-        user_id = request.session['user_id']
         user = User.objects.all().get(id=user_id)
-        all_items = Item.objects.all().order_by("-created_at")
 
-        if keyword == "mine":
-            all_items = all_items.filter(owner=user)
+        all_items = Item.objects.all().filter(campus=user.campus).order_by("-created_at")
+        lost_items = all_items.filter(found=False)
+        found_items = all_items.filter(found=True)
 
         context = {
-            'keyword': keyword,
             'user': user,
-            'lost_items': all_items.filter(found=False),
-            'found_items': all_items.filter(found=True),
+            'lost_items': lost_items,
+            'found_items': found_items,
+            'my_lost_items': lost_items.filter(owner=user),
+            'my_found_items': found_items.filter(owner=user),
         }
 
         return render(request, 'home.html', context)
@@ -86,7 +72,7 @@ def add_item(request):
         desc = request.POST['desc']
         image = request.FILES['image']
         item = Item.objects.create(
-            name=name, desc=desc, image=image, owner=owner)
+            name=name, desc=desc, image=image, owner=owner, campus=owner.campus)
         return redirect("/")
 
     def catch_errors():

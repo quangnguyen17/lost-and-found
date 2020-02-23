@@ -27,8 +27,8 @@ SECRET_KEY = '9iebf!(7&86i6ro)5i7&4^nc$&4*6ucoi_=2pe2$j(2!nbmno9'
 # TODO: Fix DEBUG
 DEBUG = True
 # '13.56.234.75'
-ALLOWED_HOSTS = ['13.56.234.75', 'lost.dojoafterdark.com']
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['13.56.234.75', 'lost.dojoafterdark.com']
+ALLOWED_HOSTS = []
 
 # Include BOOTSTRAP4_FOLDER in path
 BOOTSTRAP4_FOLDER = os.path.abspath(os.path.join(BASE_DIR, "..", "bootstrap4"))

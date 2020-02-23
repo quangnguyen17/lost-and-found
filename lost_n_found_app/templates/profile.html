@@ -88,13 +88,13 @@
                 campus = "";
 
                 $("select option:selected").each(function () {
-                    campus = $(this).text();
+                    campus = $(this).text().trim();
                 });
 
                 $.ajax({
                     type: "GET",
                     url: "/update_campus",
-                    data: { 'campus': campus.trim() },
+                    data: { 'campus': campus },
                     success: function (response) {
                         $('#campus-display').text(`Coding Dojo (${campus})`);
                     }

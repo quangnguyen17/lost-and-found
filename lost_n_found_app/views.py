@@ -31,24 +31,40 @@ def index(request):
 
 def home(request):
     if user_logged_in(request):
+        all_users = User.objects.all()
         user_id = request.session['user_id']
-        user = User.objects.all().get(id=user_id)
-
-        all_items = Item.objects.all().filter(campus=user.campus).order_by("-created_at")
-        lost_items = all_items.filter(found=False)
-        found_items = all_items.filter(found=True)
+        user = all_users.get(id=user_id)
 
         context = {
             'user': user,
-            'lost_items': lost_items,
-            'found_items': found_items,
-            'my_lost_items': lost_items.filter(owner=user),
-            'my_found_items': found_items.filter(owner=user),
+            'users_at_campus': all_users.filter(campus=user.campus).exclude(id=user.id),
+            'items': Item.objects.all().order_by("-created_at"),
         }
 
+        request.session['previous_route'] = None
         return render(request, 'home.html', context)
 
     return redirect("/welcome")
+
+
+def profile(request, user_id):
+    if user_logged_in(request):
+        user = User.objects.all().get(id=user_id)
+
+        campuses = []
+        for campus in Campus:
+            campuses.append(campus.value)
+
+        context = {
+            'user': user,
+            'items': Item.objects.all().filter(owner=user),
+            'campuses': campuses
+        }
+
+        request.session['previous_route'] = f"/home/profile/{user_id}"
+        return render(request, 'profile.html', context)
+
+    return redirect("/")
 
 
 def add(request):
@@ -106,4 +122,21 @@ def handle_item(request, item_id, action):
         item.save()
 
     item.delete() if action == "delete" else update()
+
+    if 'previous_route' in request.session:
+        if request.session['previous_route'] != None:
+            return redirect(request.session['previous_route'])
+
     return redirect("/home")
+
+
+def update_campus(request):
+    if not user_logged_in(request):
+        return redirect("/welcome")
+
+    campus = request.GET['campus']
+    user_id = request.session['user_id']
+    user = User.objects.all().get(id=user_id)
+    user.campus = campus
+    user.save()
+    return HttpResponse("success")

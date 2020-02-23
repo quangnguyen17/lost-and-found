@@ -4,6 +4,7 @@
 * {
     font-family: 'Questrial', sans-serif;
     word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .align-items-center {
@@ -22,26 +23,55 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    padding-top: 75%;
+    padding-top: 100%;
     position: relative;
 }
 
-#bottom-right-btn {
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border-style: none;
+    white-space: nowrap;
+}
+
+.bottom-left {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+}
+
+.bottom-right {
     position: absolute;
     right: 0;
     bottom: 0;
 }
 
+select:not([multiple]) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"><path d="M4 8L0 4h8z"/></svg>');
+    padding: .5em;
+    padding-right: 1.5em
+}
+
+#select {
+    border-radius: 0;
+}
+
 img {
     object-fit: cover;
-}
-
-.wrapped-text {
-    overflow-wrap: break-word;
-}
-
-.content-right {
-    vertical-align: middle;
 }
 
 @keyframes fade-in {
@@ -52,27 +82,3 @@ img {
         opacity: 1;
     }
 }
-
-/* Extra small devices (portrait phones, less than 576px) */
-
-@media (max-width: 575.98px) {
-    /* .col-sm-12 {
-        padding: 0px;
-    } */
-}
-
-/* Small devices (landscape phones, less than 768px) */
-
-@media (max-width: 767.98px) {}
-
-/* Medium devices (tablets, less than 992px) */
-
-@media (max-width: 991.98px) {}
-
-/* Large devices (desktops, less than 1200px) */
-
-@media (max-width: 1199.98px) {}
-
-/* Extra large devices (large desktops) */
-
-/* No media query since the extra-large breakpoint has no upper bound on its width */

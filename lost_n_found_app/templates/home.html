@@ -150,19 +150,15 @@
                     <div class="image-box"
                         style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)), url({{ item.image.url }});">
                         <div class="text-light">
-                            <ul class="list-inline w-100 d-block">
-                                <li class="list-inline-item">
-                                    <p class="text-danger ml-4">#missing</p>
-                                </li>
-                                <li id="bottom-right-btn" class="list-inline-item text-right">
-                                    <a href="found_item/{{ item.id }}"
-                                        class="btn btn-success rounded-0 px-3 py-2">Found</a><br>
-                                    {% if item.owner.id == user.id %}
-                                    <a href="remove_item/{{ item.id }}"
-                                        class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
-                                    {% endif %}
-                                </li>
-                            </ul>
+                            <h4 class="text-danger pl-4 pb-4">#missing</h4>
+                            <div id="bottom-right-btn" class="text-right">
+                                <a href="found_item/{{ item.id }}"
+                                    class="btn btn-success rounded-0 px-3 py-2">Found</a><br>
+                                {% if item.owner.id == user.id %}
+                                <a href="remove_item/{{ item.id }}"
+                                    class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,31 +186,26 @@
                     <div class="image-box"
                         style="background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)), url({{ item.image.url }});">
                         <div class="text-light">
-                            <ul class="list-inline w-100 d-block">
-                                <li class="list-inline-item">
-                                    <a class="m-0 p-0 text-light" href="#">
-                                        <ul class="list-inline mb-3 ml-3">
-                                            <li class="list-inline-item align-middle mr-2 p-0">
-                                                <img class="rounded-circle m-0 p-0" width="53" height="53"
-                                                    src="{{ item.found_by_whom.profile_image.url }}" alt="">
-                                            </li>
-                                            <li class="list-inline-item align-middle m-0 p-0">
-                                                <h6 class="m-0 font-weight-bold">@{{ item.found_by_whom.first_name }}
-                                                </h6>
-                                                <p class="m-0"><small>Found this item.</small></p>
-                                            </li>
-                                        </ul>
-                                    </a>
+                            <ul class="list-inline pl-3 pb-3">
+                                <li class="list-inline-item align-middle mr-2 p-0">
+                                    <img class="rounded-circle m-0 p-0" width="53" height="53"
+                                        src="{{ item.found_by_whom.profile_image.url }}" alt="">
                                 </li>
-                                <li id="bottom-right-btn" class="list-inline-item text-right">
-                                    <a href="unfound_item/{{ item.id }}"
-                                        class="btn btn-warning rounded-0 px-3 py-2">Unfound</a><br>
-                                    {% if item.owner.id == user.id %}
-                                    <a href="remove_item/{{ item.id }}"
-                                        class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
-                                    {% endif %}
+                                <li class="list-inline-item align-middle m-0 p-0">
+                                    <h6 class="m-0 font-weight-bold">@{{ item.found_by_whom.first_name }}
+                                    </h6>
+                                    <p class="m-0"><small>Found this item.</small></p>
                                 </li>
                             </ul>
+
+                            <div id="bottom-right-btn" class="text-right">
+                                <a href="unfound_item/{{ item.id }}"
+                                    class="btn btn-warning rounded-0 px-3 py-2">Unfound</a><br>
+                                {% if item.owner.id == user.id %}
+                                <a href="remove_item/{{ item.id }}"
+                                    class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>

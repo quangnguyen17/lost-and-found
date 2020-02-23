@@ -3,6 +3,7 @@
 
 * {
     font-family: 'Questrial', sans-serif;
+    word-wrap: break-word;
 }
 
 .align-items-center {
@@ -21,34 +22,14 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    padding-top: 100%;
+    padding-top: 75%;
     position: relative;
 }
 
-.content-box {
-    background-color: rgba(0, 0, 0, 0.6);
+#bottom-right-btn {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
     right: 0;
     bottom: 0;
-    opacity: 0;
-    transition: opacity 0.25s;
-}
-
-.content-box:hover {
-    opacity: 1;
-}
-
-.sized {
-    height: 300px;
-}
-
-.position-relative {
-    width: 100%;
-    position: relative;
 }
 
 img {

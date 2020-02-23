@@ -38,11 +38,25 @@
                 $('#status').text((elementID === "found-btn") ? "#found" : "#missing");
             });
 
-            date = new Date();
-            $('.nowtime').text("Today: " + date.toDateString());
+            $('#select').change(function () {
+                campus = "";
+
+                $("select option:selected").each(function () {
+                    campus += $(this).text();
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/update_campus",
+                    data: { 'campus': campus },
+                    success: function (response) {
+                        $('#campus-display').text(`Coding Dojo (${campus})`);
+                    }
+                });
+            });
         });
     </script>
-    <title>Lost&Found - Home</title>
+    <title>Lost&Found - {{ user.first_name }} {{ user.last_name }}</title>
 </head>
 
 <body>
@@ -53,32 +67,53 @@
             <span>•••</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav text-center mr-auto">
-            </ul>
+            <ul class="navbar-nav text-center mr-auto"></ul>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center ml-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-light rounded-0 px-4" href="/home">Home</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">Log Out</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container-fluid p-0 m-0">
+    <div class="container-fluid m-0 p-0">
         <!-- HEADER -->
         <div class="row p-0 m-0 text-center align-items-center">
             <ul class="list-inline m-0 p-1">
                 <li class="m-0 p-0">
                     <ul class="list-inline m-0 p-4">
                         <li class="list-inline-item m-0 p-0 align-middle">
-                            <img class="rounded-circle border border-light" width="180" height="180"
+                            <img class="rounded-circle border border-light" width="200" height="200"
                                 src="{{ user.profile_image.url }}" alt="profile_image">
                         </li>
-                        <li class="list-inline-item m-0 p-4 text-center align-middle">
-                            <h2 class="m-0">Welcome, {{ user.first_name }}!</h2>
+                        <li class="list-inline-item m-0 px-5 py-4 text-center align-middle">
+                            <h2 class="m-0">{{ user.first_name }} {{ user.last_name }}</h2>
                             <p class="mb-2 text-secondary">({{ user.level }})</p>
+
+                            {% if user.id == request.session.user_id %}
+                            <p id="campus-display" class="m-0">Coding Dojo ({{ user.campus }})</p>
+
+                            <div class="form-group mt-2 mb-3">
+                                <select id="select" class="form-control w-75 mx-auto rounded-0" name="campus" required>
+                                    <option value="{{ user.campus }}">Select Campus</option>
+                                    {% for campus in campuses %}
+                                    <option value="{{ campus }}">{{ campus }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label class="form-check-label mb-1 text-secondary" for="inlineRadio1"><small>* Change
+                                        campus</small></label>
+                            </div>
+
+                            {% else %}
                             <p class="m-0">Coding Dojo ({{ user.campus }})</p>
-                            <p class="nowtime m-0"></p>
+                            {% endif %}
+
+                            <p class="m-0">{{ user.email }}</p>
+                            <p class="m-0">Joined {{ user.created_at.date }}</p>
                         </li>
                         <li class="list-inline-item m-0 py-4 px-3 text-center align-middle">
                             <p>I have:</p>
@@ -86,8 +121,7 @@
                                 <li class="list-inline-item">
                                     <ul class="list-inline text-center">
                                         <li>
-                                            <h1 class="m-0 font-weight-bold">
-                                                {{ items|missing|at_campus:user.campus|mine:user|length }}</h1>
+                                            <h1 class="m-0 font-weight-bold">{{ items|missing|length }}</h1>
                                         </li>
                                         <li class="text-danger">#missing</li>
                                     </ul>
@@ -95,84 +129,31 @@
                                 <li class="list-inline-item">
                                     <ul class="list-inline text-center">
                                         <li>
-                                            <h1 class="m-0 font-weight-bold">
-                                                {{ items|found|at_campus:user.campus|mine:user|length }}</h1>
+                                            <h1 class="m-0 font-weight-bold">{{ items|found|length }}</h1>
                                         </li>
                                         <li class="text-success">#found</li>
                                     </ul>
                                 </li>
                             </ul>
+                            <p class="m-0 mt-3 text-secondary"><small>* At all campuses</small></p>
                         </li>
-                    </ul>
-                </li>
-                <li class="my-3 p-0">
-                    <ul class="list-inline m-0">
-                        <li class="list-inline-item m-1">
-                            <a class="btn btn-lg btn-warning rounded-0 px-3 py-2 m-0"
-                                href="{% if keyword != None %} add {% else %} /home/add {% endif %}">
-                                <span class="mr-1">[&#43;]</span>
-                                <span>Add Item</span>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-1">
+                        <li class="my-3 p-0">
                             <div class="btn-group m-0" role="group" aria-label="">
                                 <button id="lost-btn" type="button" class="btn btn-light active rounded-0 type">#missing
-                                    ({{ items|missing|at_campus:user.campus|length }})</button>
+                                    ({{ items|missing|length }})</button>
                                 <button id="found-btn" type="button" class="btn btn-light rounded-0 type">#found
-                                    ({{ items|found|at_campus:user.campus|length }})</button>
+                                    ({{ items|found|length }})</button>
                             </div>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-        <!-- BODY -->
-        <div class="row py-0 px-4 m-0">
-            <h4 class="my-4 px-1">People you may know at your campus</h4>
-        </div>
-        <div class="row m-0 p-0 pb-4 align-items-center">
-            <ul class="list-inline p-0 m-0 pb-3 w-100 h-100 scrolling-wrapper">
-                <li class="list-inline-item d-inline-block mx-2"></li>
-                <li class="list-inline-item d-inline-block mx-2">
-                    <a class="m-0 p-0" href="/home/profile/{{ user.id }}" style="text-decoration: none;">
-                        <ul class="list-inline text-center">
-                            <li>
-                                <img class="rounded-circle m-0 p-0 mb-3 border border-light" width="112.5"
-                                    height="112.5" src="{{ user.profile_image.url }}" alt="">
-                            </li>
-                            <li>
-                                <h6 class="m-0 text-dark">You</h6>
-                                <p class="text-secondary m-0">({{ user.level }})</p>
-                            </li>
-                        </ul>
-                    </a>
-                </li>
-                {% for user_at_campus in users_at_campus %}
-                <li class="list-inline-item d-inline-block mx-2">
-                    <a class="m-0 p-0" href="home/profile/{{ user_at_campus.id }}" style="text-decoration: none;">
-                        <ul class="list-inline text-center">
-                            <li>
-                                <img class="rounded-circle m-0 p-0 mb-3 border border-light" width="112.5"
-                                    height="112.5" src="{{ user_at_campus.profile_image.url }}" alt="">
-                            </li>
-                            <li>
-                                <h6 class="m-0 text-dark">{{ user_at_campus.first_name }}
-                                    {{ user_at_campus.last_name }}</h6>
-                                <p class="text-secondary m-0">({{ user_at_campus.level }})</p>
-                            </li>
-                        </ul>
-                    </a>
-                </li>
-                {% endfor %}
-                <li class="list-inline-item d-inline-block mx-2"></li>
-            </ul>
-        </div>
-        <!-- CELLS -->
         <div class="row py-0 px-4 m-0">
             <h4 id="status" class="px-1">#missing</h4>
         </div>
         <div class="row pb-5 px-3 m-0 lost-section">
-            {% for item in items|missing|at_campus:user.campus %}
+            {% for item in items|missing %}
             <div class="col-lg-4 col-md-6 col-sm-12 p-0 fade-in">
                 <div class="padded-box p-2">
                     <ul class="list-inline m-0 pb-3 pr-3">
@@ -184,7 +165,7 @@
                             </li>
                             <li class="list-inline-item align-middle m-0 p-0">
                                 <h6 class="m-0 font-weight-bold">@{{ item.owner.first_name }}</h6>
-                                <p class="m-0 p-0 text-secondary"><small>Coding Dojo ({{ item.campus }})</small></p>
+                                <p class="m-0 text-secondary"><small>Coding Dojo ({{ item.campus }})</small></p>
                             </li>
                         </a>
                         <li class="align-middle mt-3 p-0">
@@ -202,10 +183,10 @@
                                 </p>
                             </div>
                             <div class="text-right bottom-right">
-                                <a href="found_item/{{ item.id }}"
+                                <a href="/found_item/{{ item.id }}"
                                     class="btn btn-success rounded-0 px-3 py-2">Found</a><br>
                                 {% if item.owner.id == user.id %}
-                                <a href="remove_item/{{ item.id }}"
+                                <a href="/remove_item/{{ item.id }}"
                                     class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
                                 {% endif %}
                             </div>
@@ -216,7 +197,7 @@
             {% endfor %}
         </div>
         <div class="row pb-5 px-3 m-0 found-section">
-            {% for item in items|found|at_campus:user.campus %}
+            {% for item in items|found %}
             <div class="col-lg-4 col-md-6 col-sm-12 p-0 fade-in">
                 <div class="padded-box p-2">
                     <ul class="list-inline m-0 pb-3 pr-3">
@@ -258,10 +239,10 @@
                             </ul>
 
                             <div class="text-right bottom-right">
-                                <a href="unfound_item/{{ item.id }}"
+                                <a href="/unfound_item/{{ item.id }}"
                                     class="btn btn-warning rounded-0 px-3 py-2">Unfound</a><br>
                                 {% if item.owner.id == user.id %}
-                                <a href="remove_item/{{ item.id }}"
+                                <a href="/remove_item/{{ item.id }}"
                                     class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
                                 {% endif %}
                             </div>

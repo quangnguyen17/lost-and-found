@@ -44,18 +44,6 @@
     white-space: nowrap;
 }
 
-.bottom-left {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-}
-
-.bottom-right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
 select:not([multiple]) {
     -webkit-appearance: none;
     -moz-appearance: none;

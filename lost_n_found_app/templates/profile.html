@@ -12,6 +12,19 @@
     {% load my_filters %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'home.css' %}">
+    <style>
+        .bottom-left {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
     <script>
         $(document).ready(function () {
             $('.found-section').hide();
@@ -99,9 +112,9 @@
 
                             <div class="form-group mt-2 mb-3">
                                 <select id="select" class="form-control w-75 mx-auto rounded-0" name="campus" required>
-                                    <option value="{{ user.campus }}">Select Campus</option>
                                     {% for campus in campuses %}
-                                    <option value="{{ campus }}">{{ campus }}</option>
+                                    <option value="{{ campus }}" {% if campus == user.campus %} selected {% endif %}>
+                                        {{ campus }}</option>
                                     {% endfor %}
                                 </select>
                                 <label class="form-check-label mb-1 text-secondary" for="inlineRadio1"><small>* Change

@@ -12,6 +12,19 @@
     {% load my_filters %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'home.css' %}">
+    <style>
+        .bottom-left {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+        }
+
+        .bottom-right {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
     <script>
         $(document).ready(function () {
             $('.found-section').hide();
@@ -66,7 +79,7 @@
     </nav>
     <div class="container-fluid p-0 m-0">
         <!-- HEADER -->
-        <div class="row p-0 m-0 text-center align-items-center">
+        <div class="row p-0 m-0 pt-3 text-center align-items-center">
             <ul class="list-inline m-0 p-1">
                 <li class="m-0 p-0">
                     <ul class="list-inline m-0 p-4">
@@ -105,8 +118,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="my-3 p-0">
-                    <ul class="list-inline m-0">
+                <li class="m-0 p-0">
+                    <ul class="list-inline m-0 p-0">
                         <li class="list-inline-item m-1">
                             <a class="btn btn-lg btn-warning rounded-0 px-3 py-2 m-0"
                                 href="{% if keyword != None %} add {% else %} /home/add {% endif %}">

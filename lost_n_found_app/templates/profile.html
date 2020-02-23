@@ -94,7 +94,7 @@
                 $.ajax({
                     type: "GET",
                     url: "/update_campus",
-                    data: { 'campus': campus },
+                    data: { 'campus': campus.trim() },
                     success: function (response) {
                         $('#campus-display').text(`Coding Dojo (${campus})`);
                     }
@@ -146,7 +146,8 @@
                             <div class="form-group mt-2 mb-3">
                                 <select id="select" class="form-control w-75 mx-auto rounded-0" name="campus" required>
                                     {% for campus in campuses %}
-                                    <option value="{{ campus }}" {% if campus == user.campus %} selected {% endif %}>
+                                    <option value="{{ campus }}"
+                                        {% if campus == user.campus %}selected{% else %}{% endif %}>
                                         {{ campus }}</option>
                                     {% endfor %}
                                 </select>

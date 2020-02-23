@@ -23,10 +23,16 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
-    padding-top: 100%;
+    padding-top: 75%;
     position: relative;
 }
 
+<<<<<<< HEAD
+#bottom-right-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+=======
 .content {
     position: absolute;
     width: 100%;
@@ -44,6 +50,22 @@
     white-space: nowrap;
 }
 
+<<<<<<< HEAD
+=======
+.bottom-left {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+}
+
+.bottom-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+>>>>>>> e704b9f799da670004665886596d5ef3e724c0d9
+}
+
+>>>>>>> 087e71f3dd9fa58f12c801dad27b505c92658f96
 select:not([multiple]) {
     -webkit-appearance: none;
     -moz-appearance: none;

@@ -68,7 +68,7 @@
                 <ul class="list-inline m-0 p-5">
                     <li class="list-inline-item m-0 p-0 align-middle">
                         <a class="m-0 p-0" href="/home/profile/{{ user.id }}">
-                            <img class="rounded-circle border border-light" width="150" height="150"
+                            <img class="rounded-circle border border-light" width="175" height="175"
                                 src="{{ user.profile_image.url }}" alt="profile_image">
                         </a>
                     </li>
@@ -105,19 +105,21 @@
                 </ul>
             </div>
             <div class="col-md-6 col-sm-12 m-0 p-0">
-                <h4 class="m-0">People you may know at your campus</h4>
-                <ul class="list-inline m-0 p-5 pt-0 w-100 h-100 scrolling-wrapper">
+                <ul class="list-inline text-left m-0 p-5 w-100 h-100 scrolling-wrapper">
+                    <li>
+                        <h4 class="mb-3">People you may know at your campus</h4>
+                    </li>
                     {% for user_at_campus in users_at_campus %}
                     <li class="list-inline-item d-inline-block mx-2">
                         <a class="m-0 p-0" href="home/profile/{{ user_at_campus.id }}" style="text-decoration: none;">
                             <ul class="list-inline text-center">
                                 <li>
-                                    <img class="rounded-circle m-0 p-0 mb-3 border border-light" width="112.5"
-                                        height="112.5" src="{{ user_at_campus.profile_image.url }}" alt="">
+                                    <img class="rounded-circle m-0 p-0 mb-2 border border-light" width="100"
+                                        height="100" src="{{ user_at_campus.profile_image.url }}" alt="">
                                 </li>
                                 <li>
-                                    <h6 class="m-0 text-dark">{{ user_at_campus.first_name }}
-                                        {{ user_at_campus.last_name }}</h6>
+                                    <p class="m-0 text-dark">
+                                        {{ user_at_campus.first_name }} {{ user_at_campus.last_name }}</p>
                                     <p class="text-secondary m-0">({{ user_at_campus.level }})</p>
                                 </li>
                             </ul>

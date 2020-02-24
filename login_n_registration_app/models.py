@@ -67,7 +67,7 @@ class UserManager(models.Manager):
         errors = {}
 
         image_extension = self.get_ext(FILES['profile_image'].name)
-        if image_extension not in self.VALID_IMAGE_EXTENSIONS():
+        if image_extension.lower() not in self.VALID_IMAGE_EXTENSIONS():
             errors['profile_image'] = "Filetype not supported, please upload your image in valid formats. We only support: JPG, JPEG"
         if len(POST['first_name']) < 2:
             errors['first_name'] = "First Name - required; at least 2 characters; letters only"

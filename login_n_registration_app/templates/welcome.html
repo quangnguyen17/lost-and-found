@@ -4,84 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
-    {% load static %}
     <link rel="stylesheet" href="{% static 'welcome.css' %}">
     <title>Lost&Found</title>
 </head>
 
 <body>
     <div class="container-fluid m-0 p-0">
-        <div class="row bg-light p-0 m-0">
-            <div class="col-md-7 h-full col-sm-12 text-center align-items-center">
-                <ul class="w-75 list-inline">
-                    <li>
-                        <h1 class="font-weight-bold">Lost&Found</h1>
-                        <p class="m-0">Powered by DojoAfterDark</p>
-                        <p class="m-0">#codingdojooc</p>
-                    </li>
-                    <li class="my-5">
-                        "A missing item finder app that will help users find their glasses, keys, wallet, socks and
-                        other items that they put somewhere and then forget where they actually placed them. One way to
-                        do this is
-                        taking a pic with your phone each time you place such an item so that you can look at the pic if
-                        you forget about it later."
-                    </li>
-                    <li>
-                        <img class="text-center img-fluid" src="{% static 'forget-things.gif' %}" alt="">
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-5 h-full col-sm-12 text-center align-items-center"
-                style="background-color: rgb(30, 30, 30);">
-                <ul class="list-inline p-0 m-0 w-75">
-                    <li>
-                        <form action="login" method="POST" class="text-center text-light">
-                            {% csrf_token %}
-                            <h3 class="mb-4 p-0">Welcome to L&F, Sign In.</h3>
-                            <input name="email" type="email"
-                                class="form-control p-4 text-light border border-secondary rounded-0 mb-1"
-                                placeholder="Email" style="background-color: rgba(0, 0, 0, 0);" required>
-                            <input name="password" type="password"
-                                class="form-control p-4 text-light border border-secondary rounded-0"
-                                placeholder="Password" style="background-color: rgba(0, 0, 0, 0);" required>
-                            <input type="submit" class="btn btn-secondary px-4 py-2 mt-4 rounded-0" name="login"
-                                value="Sign In" style="background-color: rgba(255, 255, 255, 0.05);">
-                        </form>
-                    </li>
-                    <li class="mt-5 text-center">
-                        <ul class="list-inline m-0 p-0">
-                            <li>
-                                <h1 id="dojoafterdark" class="d-inline-block">
-                                    dojo<br />
-                                    after<br />
-                                    dark
-                                </h1>
-                            </li>
-                            <li class="mt-1">
-                                <p class="m-0 p-0 text-light">Go to our site: <a class="text-light"
-                                        href="https://dojoafterdark.com/" target="_blank">&copy;dojoafterdark</a></p>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="row bg-dark p-5 m-0 text-center align-items-center">
+            <ul class="list-inline text-light text-center m-0">
+                <li class="text-center">
+                    <h1 class="font-weight-bold">Lost&Found</h1>
+                    <p class="mb-2">Powered by</p>
+                    <a class="m-0 p-0" style="text-decoration: none;" href="https://dojoafterdark.com/" target="_blank">
+                        <h1 id="dojoafterdark" class="d-inline-block">
+                            dojo<br />
+                            after<br />
+                            dark
+                        </h1>
+                    </a>
+                    <p class="m-0">#codingdojooc</p>
+                </li>
+                <li class="my-5">
+                    A missing item finder app that will help users find their glasses, keys, wallet, socks and
+                    other items that they put somewhere and then forget where they actually placed them. One way to
+                    do this is
+                    taking a pic with your phone each time you place such an item so that you can look at the pic if
+                    you forget about it later.
+                </li>
+                <li>
+                    <img class="text-center img-fluid" src="{% static 'forget-things.gif' %}" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="row bg-light p-5 m-0 text-center align-items-center">
+            <div class="col-md-6 col-sm-12 m-0 p-0 text-center">
+                <form action="login" method="POST" class="text-center">
+                    {% csrf_token %}
+                    <h3 class="mb-4 p-0">Welcome to L&F, Sign In.</h3>
+                    <input name="email" type="email" class="form-control p-4 rounded-0 mb-1" placeholder="Email"
+                        style="background-color: rgba(0, 0, 0, 0);" required>
+                    <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
+                        style="background-color: rgba(0, 0, 0, 0);" required>
+                    <input type="submit" class="btn btn-secondary px-4 py-2 mt-4 rounded-0" name="login"
+                        value="Sign In">
+                </form>
             </div>
         </div>
-        <div class="row h-full m-0 p-0 text-center align-items-center">
-            <form action="register" method="POST" class="text-center w-75" enctype="multipart/form-data">
+        <div class="row m-0 p-5 text-center align-items-center">
+            <form action="register" method="POST" class="text-center w-100" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h1 class="mb-3"><span class="text-secondary">Don't have an account?</span> Sign Up.</h1>
+                <h3 class="mb-3"><span class="text-secondary">Don't have an account?</span> Sign Up.</h3>
 
                 <!-- PROFILE IMAGE -->
                 <div class="form-group my-4 w-75 d-block mx-auto">
                     <label for="exampleFormControlFile1">Upload your profile image!</label>
                     <input type="file" class="form-control-file w-75 d-block mx-auto" name="profile_image" required>
                     <small id="descHelp" class="form-text text-muted mt-2">* Please upload your image in these valid
-                        formats.
-                        We only support: JPG, JPEG.</small>
+                        formats. We only support: JPG, JPEG.</small>
                 </div>
 
                 <!-- FIRST NAME, LAST NAME -->

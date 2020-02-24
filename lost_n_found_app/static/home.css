@@ -44,6 +44,25 @@
     white-space: nowrap;
 }
 
+.image-box {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 select:not([multiple]) {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -56,6 +75,18 @@ select:not([multiple]) {
 
 #select {
     border-radius: 0;
+}
+
+.bottom-left {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+}
+
+.bottom-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 img {

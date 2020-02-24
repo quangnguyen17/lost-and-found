@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo+2:200i');
 /* FONTS */
 
 * {
     font-family: 'Questrial', sans-serif;
+}
+
+:root {
+    --neon-text-color: #f40;
+    --neon-border-color: #08f;
 }
 
 .align-items-center {
@@ -50,15 +56,7 @@ select:not([multiple]) {
     border-radius: 0;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Exo+2:200i);
-:root {
-    /* Set neon color */
-    --neon-text-color: #f40;
-    --neon-border-color: #08f;
-}
-
 #dojoafterdark {
-    font-size: 2rem;
     font-weight: 200;
     font-style: italic;
     color: #fff;
@@ -82,8 +80,6 @@ select:not([multiple]) {
 #dojoafterdark:focus {
     outline: none;
 }
-
-/* Animate neon flicker */
 
 @keyframes flicker {
     0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {

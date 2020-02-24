@@ -4,60 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load my_filters %}
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     {% bootstrap_messages %}
-    {% load static %}
-    {% load my_filters %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'home.css' %}">
-    <style>
-        .image-box {
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 100%;
-            padding-top: 100%;
-            position: relative;
-        }
-
-        .content {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        select:not([multiple]) {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-position: right 50%;
-            background-repeat: no-repeat;
-            background-image: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"><path d="M4 8L0 4h8z"/></svg>');
-            padding: .5em;
-            padding-right: 1.5em
-        }
-
-        #select {
-            border-radius: 0;
-        }
-
-        .bottom-left {
-            position: absolute;
-            left: 16px;
-            bottom: 16px;
-        }
-
-        .bottom-right {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.found-section').hide();
@@ -163,7 +117,7 @@
                             <p class="m-0">Joined {{ user.created_at.date }}</p>
                         </li>
                         <li class="list-inline-item m-0 py-4 px-3 text-center align-middle">
-                            <p>I have:</p>
+                            <p>{% if user.id == request.session.user_id %} I have {% else %} {{ user.first_name }} has {% endif %}</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <ul class="list-inline text-center">

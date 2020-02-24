@@ -57,6 +57,7 @@ select:not([multiple]) {
 }
 
 #dojoafterdark {
+    font-size: 3rem;
     font-weight: 200;
     font-style: italic;
     color: #fff;

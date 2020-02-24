@@ -28,7 +28,7 @@ class ItemManager(models.Manager):
         if len(POST['desc']) < 5:
             errors['desc'] = "Item's description must be longer than 5 characters"
         image_extension = self.get_ext(FILES['image'].name)
-        if image_extension not in self.VALID_IMAGE_EXTENSIONS():
+        if image_extension.lower() not in self.VALID_IMAGE_EXTENSIONS():
             errors['image'] = "Filetype not supported, please upload your image in valid formats. We only support: JPG, JPEG"
 
         return errors

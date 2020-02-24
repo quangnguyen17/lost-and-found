@@ -87,12 +87,12 @@
                 <li class="m-0 p-0">
                     <ul class="list-inline m-0 p-4">
                         <li class="list-inline-item m-0 p-0 align-middle">
-                            <img class="rounded-circle border border-light" width="200" height="200"
+                            <img class="rounded-circle border border-light" width="175" height="175"
                                 src="{{ user.profile_image.url }}" alt="profile_image">
                         </li>
                         <li class="list-inline-item m-0 px-5 py-4 text-center align-middle">
                             <h2 class="m-0">{{ user.first_name }} {{ user.last_name }}</h2>
-                            <p class="mb-2 text-secondary">({{ user.level }})</p>
+                            <p class="text-secondary"><small>({{ user.level }})</small></p>
 
                             {% if user.id == request.session.user_id %}
                             <p id="campus-display" class="m-0">Coding Dojo ({{ user.campus }})</p>
@@ -114,10 +114,11 @@
                             {% endif %}
 
                             <p class="m-0">{{ user.email }}</p>
-                            <p class="m-0">Joined {{ user.created_at.date }}</p>
+                            <p class="m-0"><small>Joined {{ user.created_at.date }}</small></p>
                         </li>
                         <li class="list-inline-item m-0 py-4 px-3 text-center align-middle">
-                            <p>{% if user.id == request.session.user_id %} I have {% else %} {{ user.first_name }} has {% endif %}</p>
+                            <p>{% if user.id == request.session.user_id %} I have {% else %} {{ user.first_name }} has
+                                {% endif %}</p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <ul class="list-inline text-center">
@@ -186,8 +187,8 @@
                             <div class="text-right bottom-right">
                                 <a href="/found_item/{{ item.id }}"
                                     class="btn btn-success rounded-0 px-3 py-2">Found</a><br>
-                                {% if item.owner.id == user.id %}
-                                <a href="/remove_item/{{ item.id }}"
+                                {% if item.owner.id == request.session.user_id %}
+                                <a href="remove_item/{{ item.id }}"
                                     class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
                                 {% endif %}
                             </div>
@@ -240,12 +241,12 @@
                             </ul>
 
                             <div class="text-right bottom-right">
-                                <a href="/unfound_item/{{ item.id }}"
-                                    class="btn btn-warning rounded-0 px-3 py-2">Unfound</a><br>
-                                {% if item.owner.id == user.id %}
-                                <a href="/remove_item/{{ item.id }}"
-                                    class="btn btn-danger rounded-0 px-3 py-2">Remove</a>
+                                {% if item.owner.id == request.session.user_id %}
+                                <a href="remove_item/{{ item.id }}"
+                                    class="btn btn-danger rounded-0 px-3 py-2">Remove</a><br>
                                 {% endif %}
+                                <a href="/unfound_item/{{ item.id }}" class="btn btn-warning rounded-0 px-3 py-2">Report
+                                    Missing</a>
                             </div>
                         </div>
                     </div>

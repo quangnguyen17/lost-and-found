@@ -14,46 +14,72 @@
 </head>
 
 <body>
-    <div class="container-fluid m-0 p-0">
-        <div class="row bg-dark p-5 m-0 text-center align-items-center">
-            <ul class="list-inline text-light text-center m-0">
-                <li class="text-center">
-                    <h1 class="font-weight-bold">Lost&Found</h1>
-                    <p class="mb-2">Powered by</p>
-                    <a class="m-0 p-0" style="text-decoration: none;" href="https://dojoafterdark.com/" target="_blank">
-                        <h1 id="dojoafterdark" class="d-inline-block">
-                            dojo<br />
-                            after<br />
-                            dark
-                        </h1>
-                    </a>
-                    <p class="m-0">#codingdojooc</p>
-                </li>
-                <li class="my-5">
-                    A missing item finder app that will help users find their glasses, keys, wallet, socks and
-                    other items that they put somewhere and then forget where they actually placed them. One way to
-                    do this is
-                    taking a pic with your phone each time you place such an item so that you can look at the pic if
-                    you forget about it later.
-                </li>
-                <li>
-                    <img class="text-center img-fluid" src="{% static 'forget-things.gif' %}" alt="">
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-md navbar-dark pt-5" style="background: rgb(20, 20, 20);">
+        <h1 class="m-0 p-0 mr-3 text-light text-center mx-auto">Welcome to L&F, Sign In!</h1>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-dark px-5 py-0 text-center" style="background: rgb(20, 20, 20);">
+        <button class="navbar-toggler mx-auto rounded-0 p-3 mb-2" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span>Sign In</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form action="login" method="POST" class="text-center" style="margin: 0 auto;">
+                {% csrf_token %}
+                <ul class="navbar-nav">
+                    <li class="nav-item m-1 align-middle">
+                        <input name="email" type="email"
+                            class="form-control p-4 border border-secondary rounded-0 text-light" placeholder="Email"
+                            style="background-color: rgba(0, 0, 0, 0);" required>
+                    </li>
+                    <li class="nav-item m-1 align-middle">
+                        <input name="password" type="password"
+                            class="form-control p-4 border border-secondary rounded-0 text-light" placeholder="Password"
+                            style="background-color: rgba(0, 0, 0, 0);" required>
+                    </li>
+                    <li class="nav-item m-1 align-middle">
+                        <input type="submit" class="btn btn-dark rounded-0" name="login" value="Sign In"
+                            style="padding: 12px 48px;">
+                    </li>
+                </ul>
+            </form>
         </div>
-        <div class="row bg-light p-5 m-0 text-center align-items-center">
-            <div class="col-md-6 col-sm-12 m-0 p-0 text-center">
-                <form action="login" method="POST" class="text-center">
-                    {% csrf_token %}
-                    <h3 class="mb-4 p-0">Welcome to L&F, Sign In.</h3>
-                    <input name="email" type="email" class="form-control p-4 rounded-0 mb-1" placeholder="Email"
-                        style="background-color: rgba(0, 0, 0, 0);" required>
-                    <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
-                        style="background-color: rgba(0, 0, 0, 0);" required>
-                    <input type="submit" class="btn btn-secondary px-4 py-2 mt-4 rounded-0" name="login"
-                        value="Sign In">
-                </form>
+    </nav>
+    <div class="container-fluid m-0 p-0">
+        <div class="row p-5 m-0 text-center align-items-center" style="background-color: rgb(20, 20, 20);">
+            <div class="col-md-4 col-sm-12 p-3">
+                <ul class="list-inline text-light text-center m-0">
+                    <li class="text-center">
+                        <h1 class="font-weight-bold">Lost&Found</h1>
+                        <p class="mb-2">Powered by</p>
+                        <a class="m-0 p-0" style="text-decoration: none;" href="https://dojoafterdark.com/"
+                            target="_blank">
+                            <h1 id="dojoafterdark" class="d-inline-block">
+                                dojo<br />
+                                after<br />
+                                dark
+                            </h1>
+                        </a>
+                        <p class="m-0">#codingdojoorangecounty</p>
+                    </li>
+                </ul>
             </div>
+            <div class="col-md-7 col-sm-12 p-3">
+                <ul class="list-inline text-light text-center m-2">
+                    <li class="px-2">
+                        A missing item finder app that will help users find their glasses, keys, wallet, socks and
+                        other items that they put somewhere and then forget where they actually placed them. One way to
+                        do this is
+                        taking a pic with your phone each time you place such an item so that you can look at the pic if
+                        you forget about it later.
+                    </li>
+                    <li class="mt-5">
+                        <img class="text-center img-fluid"
+                            src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia.makeameme.org%2Fcreated%2Flost-stuff-lost.jpg"
+                            alt="">
+                    </li>
+                </ul>
+            </div>
+
         </div>
         <div class="row m-0 p-5 text-center align-items-center">
             <form action="register" method="POST" class="text-center w-100" enctype="multipart/form-data">

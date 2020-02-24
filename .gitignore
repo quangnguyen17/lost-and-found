@@ -4,4 +4,4 @@ venv/
 __pycache__/
 .vscode/
 db.sqlite3
-media/
+media/*

@@ -7,7 +7,6 @@ Powered by DojoAfterDark
 ## Links
 
 - [Live Site](https://lost.dojoafterdark.com)
-- [Dog API](https://dog.ceo/dog-api/)
 - [Repo](https://github.com/quangnguyen17/lost-and-found)
 - [Project Board](https://github.com/users/quangnguyen17/projects/1)
 - [DojoAfterDark](https://dojoafterdark.com)

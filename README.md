@@ -16,7 +16,10 @@ Powered by DojoAfterDark
 
 - Create a new project directory and clone repo to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
 - `cd` into repo folder
-- Run `python3 -m venv venv`to create a virtual environment
-- 
-- Run app: `python3 manage.py runserver` 
-- Go to `http://localhost:8000/` on your browser and start tesing.
+- `python3 -m venv venv`to create a virtual environment
+- `pip install -r requirements.txt` to install all the requirements to run project.
+- `python3 manage.py collectstatic`
+- `python3 manage.py makemigrations`
+- `python3 manage.py migrate`
+- Finally, to start project, run this command: `python3 manage.py runserver` 
+- Go to `http://localhost:8000/` on your browser and see the magic! :).

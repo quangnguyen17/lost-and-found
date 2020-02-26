@@ -6,11 +6,11 @@ Powered by DojoAfterDark
 
 ## Links
 
-- [Live Site](lost.dojoafterdark.com)
+- [Live Site](https://lost.dojoafterdark.com)
 - [API Link](https://dog.ceo/dog-api/)
 - [Repo](https://github.com/quangnguyen17/lost-and-found)
 - [Project Board](https://github.com/users/quangnguyen17/projects/1)
-- [DojoAfterDark](dojoafterdark.com)
+- [DojoAfterDark](https://dojoafterdark.com)
 - Deployed using GitHub and [AWS](https://aws.amazon.com/).
 
 ## How to run the project locally

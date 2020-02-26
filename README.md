@@ -18,6 +18,8 @@ Powered by DojoAfterDark
 - `cd` into repo folder
 - `python3 -m venv venv` to create a virtual environment
 - `pip install -r requirements.txt` to install all the requirements to run project.
-- Run these 3 commands: `python3 manage.py collectstatic`, `python3 manage.py makemigrations`, `python3 manage.py migrate`
+- `python3 manage.py collectstatic`
+- `python3 manage.py makemigrations`
+- `python3 manage.py migrate`
 - Finally, to start project, run this command: `python3 manage.py runserver` 
 - Go to `http://localhost:8000/` on your browser and see the magic! :).

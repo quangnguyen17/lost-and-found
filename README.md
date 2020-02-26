@@ -14,7 +14,9 @@ Powered by DojoAfterDark
 
 ## How to run the project locally
 
-- Clone project to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
-- Create a virtual environment to run app: `python3 -m venv venv`
+- Create a new project directory and clone repo to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
+- `cd` into repo folder
+- Run `python3 -m venv venv`to create a virtual environment
+- 
 - Run app: `python3 manage.py runserver` 
 - Go to `http://localhost:8000/` on your browser and start tesing.

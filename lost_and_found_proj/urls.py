@@ -22,8 +22,4 @@ urlpatterns = [
     path('', include('lost_n_found_app.urls')),
     path('welcome/', include('login_n_registration_app.urls')),
     path('admin/', admin.site.urls),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

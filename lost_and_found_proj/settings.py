@@ -24,8 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9iebf!(7&86i6ro)5i7&4^nc$&4*6ucoi_=2pe2$j(2!nbmno9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 ALLOWED_HOSTS = ['localhost', '13.56.234.75', 'lost.dojoafterdark.com']
 
 # Include BOOTSTRAP4_FOLDER in path
@@ -39,7 +38,6 @@ if BOOTSTRAP4_FOLDER not in sys.path:
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django_simple_bulma.finders.SimpleBulmaFinder',
 ]
 
 INSTALLED_APPS = [

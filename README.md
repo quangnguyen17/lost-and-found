@@ -1,32 +1,21 @@
-# Dojo After Dark
 
-Community site where anyone can create a page and contribute to the project.
+# Lost&Found
+Powered by DojoAfterDark
+
+"A missing item finder app that will help users find their glasses, keys, wallet, socks and other items that they put somewhere and then forget where they actually placed them. One way to do this is taking a pic with your phone each time you place such an item so that you can look at the pic if you forget about it later."
 
 ## Links
 
-- [Live Site](https://dojoafterdark.com/)
-- [Repo](https://github.com/CBaut/DojoAfterDark)
-- [Project Board](https://github.com/CBaut/DojoAfterDark/projects/1)
-- Deployed automatically using GitHub and [Zeit](zeit.co).
+- [Live Site](lost.dojoafterdark.com)
+- [API Link](https://dog.ceo/dog-api/)
+- [Repo](https://github.com/quangnguyen17/lost-and-found)
+- [Project Board](https://github.com/users/quangnguyen17/projects/1)
+- [DojoAfterDark](dojoafterdark.com)
+- Deployed using GitHub and [AWS](https://aws.amazon.com/).
 
 ## How to run the project locally
 
-- open `index.html` in a browser
-
-## How to create your own page
-
-- From the terminal `cd` into the folder you want to save the project
-- Clone the project `git clone https://github.com/CBaut/DojoAfterDark.git`
-- `cd` into the newly created project folder (`ls` or `dir` to view the contents of the current directory)
-- Create a new local branch with the following convention `git checkout -b {{first_name}}-{{last_name}}` (replace the contents of `{{}}` including the brackets)
-- Create your folder in the project folder using the same convention `{{first_name}}-{{last_name}}`
-- Create an `index.html` and a `styles.css` in your folder (optionaly a js file)
-- Add a link `<a>` to your folder path on the homepage
-- Stage your changes `git add .`
-- Commit your changes `git commit -m "{{commit message}}"`
-- Request to be a contributor (ask CBaut to add you to the project by sending your github username)
-- Push your local changes to the github repository `git push`
-- Create a pull request from your branch to master branch
-- Get your code reviewed
-- Merge branch into master
-- If automated deployment is successful check the [website](https://dojoafterdark.com/)
+- Clone project to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
+- Create a virtual environment to run app: `python3 -m venv venv`
+- Run app: `python3 manage.py runserver` 
+- Go to `http://localhost:8000/` on your browser and start tesing.

@@ -14,11 +14,11 @@ Powered by DojoAfterDark
 
 ## How to run the project locally
 
-- Create a new project directory and clone repo to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
+- Create a new project directory 
+- `cd` to your that directory & run `python3 -m venv venv` to create a virtual environment
+- Clone repo to your computer: `git clone https://github.com/quangnguyen17/lost-and-found.git`
 - `cd` into repo folder
-- `python3 -m venv venv` to create a virtual environment
 - `pip install -r requirements.txt` to install all the requirements to run project.
-- `python3 manage.py collectstatic`
 - `python3 manage.py makemigrations`
 - `python3 manage.py migrate`
 - Finally, to start project, run this command: `python3 manage.py runserver` 

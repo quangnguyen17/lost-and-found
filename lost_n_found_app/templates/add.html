@@ -32,11 +32,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-warning rounded-0 px-3"
+                    <a class="nav-link btn btn-warning mx-1 px-3"
                         href="{% if keyword != None %} add {% else %} /home {% endif %}">Back</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">Log Out</a>
+                    <a class="nav-link btn btn-secondary text-light px-3" href="/home/logout">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -48,13 +48,13 @@
                 <form class="w-100 text-center justify-content-center" action="/add_item" method="POST"
                     enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="text" class="form-control my-1 p-4 rounded-0" aria-describedby="emailHelp"
+                    <input type="text" class="form-control my-1 p-4 bg-light border-0" aria-describedby="emailHelp"
                         placeholder="Name" name="name" required>
                     <small id="nameHelp" class="form-text text-muted mb-3">* Item's name must be longer than 3
                         characters</small>
 
-                    <input type="text" class="form-control my-1 p-4 rounded-0" placeholder="Description" name="desc"
-                        required>
+                    <input type="text" class="form-control my-1 p-4 bg-light border-0" placeholder="Description"
+                        name="desc" required>
                     <small id="descHelp" class="form-text text-muted">* Item's description must be longer than 5
                         characters</small>
 
@@ -64,7 +64,7 @@
                         <small id="descHelp" class="form-text text-muted mt-2">* Filetype not supported, please upload
                             your image in valid formats. We only support: JPG, JPEG.</small>
                     </div>
-                    <button type="submit" class="btn btn-danger px-3 py-2 rounded-0">
+                    <button type="submit" class="btn btn-danger px-3 py-2">
                         <span class="mr-1">[+]</span>
                         <span>Add Item</span>
                     </button>

@@ -15,30 +15,28 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark px-0 pt-5 pb-2" style="background: rgb(20, 20, 20);">
-        <h1 class="m-0 p-0 text-light text-center mx-auto">Welcome to L&F, Sign In!</h1>
+        <h1 class="m-0 p-0 text-light text-center mx-auto">Welcome to L&F!, Sign In.</h1>
     </nav>
     <nav class="navbar navbar-expand-md navbar-dark px-5 py-0 text-center" style="background: rgb(20, 20, 20);">
-        <button class="navbar-toggler mx-auto rounded-0 p-3 mb-2" type="button" data-toggle="collapse"
+        <button class="navbar-toggler mx-auto bg-dark p-3 border-0 mb-2" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span>Sign In</span>
+            <span>L&F</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <form action="login" method="POST" class="text-center" style="margin: 0 auto;">
                 {% csrf_token %}
                 <ul class="navbar-nav">
                     <li class="nav-item m-1 align-middle">
-                        <input name="email" type="email"
-                            class="form-control p-3 border border-secondary rounded-0 text-light" placeholder="Email"
-                            style="background-color: rgba(0, 0, 0, 0);" required>
+                        <input name="email" type="email" class="form-control py-4 pl-4 pr-5 text-light border-0"
+                            placeholder="Email" style="background-color: rgb(40, 40, 40);" required>
                     </li>
                     <li class="nav-item m-1 align-middle">
-                        <input name="password" type="password"
-                            class="form-control p-3 border border-secondary rounded-0 text-light" placeholder="Password"
-                            style="background-color: rgba(0, 0, 0, 0);" required>
+                        <input name="password" type="password" class="form-control py-4 pl-4 pr-5 text-light border-0"
+                            placeholder="Password" style="background-color: rgb(40, 40, 40);" required>
                     </li>
                     <li class="nav-item m-1 align-middle">
-                        <input type="submit" class="btn btn-dark border border-dark rounded-0" name="login"
-                            value="Sign In" style="padding: 6px 32px;">
+                        <input type="submit" class="btn btn-dark border-0" name="login" value="Sign In"
+                            style="padding: 11.5px 44px;">
                     </li>
                 </ul>
             </form>
@@ -73,7 +71,7 @@
                         you forget about it later.
                     </li>
                     <li class="mt-5">
-                        <img class="text-center img-fluid"
+                        <img style="border-radius: 12px;" class="text-center img-fluid"
                             src="https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia.makeameme.org%2Fcreated%2Flost-stuff-lost.jpg"
                             alt="">
                     </li>
@@ -97,34 +95,35 @@
                 <!-- FIRST NAME, LAST NAME -->
                 <div class="form-row m-0 p-0">
                     <div class="col-6 p-0 pr-1">
-                        <input name="first_name" type="text" class="form-control p-4 rounded-0" placeholder="First Name"
-                            required>
+                        <input name="first_name" type="text" class="form-control p-4 bg-light border-0"
+                            placeholder="First Name" required>
                     </div>
                     <div class="col-6 p-0">
-                        <input name="last_name" type="text" class="form-control p-4 rounded-0" placeholder="Last Name"
-                            required>
+                        <input name="last_name" type="text" class="form-control p-4 bg-light border-0"
+                            placeholder="Last Name" required>
                     </div>
                 </div>
 
                 <!-- EMAIL -->
-                <input name="email" type="email" class="form-control p-4 my-1 rounded-0" placeholder="Email" required>
+                <input name="email" type="email" class="form-control p-4 bg-light border-0 my-1" placeholder="Email"
+                    required>
 
                 <!-- PASSWORD, PASSWORD CONFIRM -->
                 <div class="form-row m-0 p-0">
                     <div class="col-6 p-0 pr-1">
-                        <input name="password" type="password" class="form-control p-4 rounded-0" placeholder="Password"
-                            required>
+                        <input name="password" type="password" class="form-control p-4 bg-light border-0"
+                            placeholder="Password" required>
                     </div>
                     <div class="col-6 p-0">
-                        <input name="confirm_pw" type="password" class="form-control p-4 rounded-0"
+                        <input name="confirm_pw" type="password" class="form-control p-4 bg-light border-0"
                             placeholder="Confirm Password" required>
                     </div>
                 </div>
 
                 <!-- CAMPUS -->
-                <div class="form-group mt-2 mb-3">
+                <div class="form-group my-3">
                     <label class="form-check-label mb-1 text-secondary" for="inlineRadio1">* Select your campus</label>
-                    <select id="select" class="form-control w-75 mx-auto rounded-0" name="campus" required>
+                    <select id="select" class="form-control w-50 mx-auto bg-light border-0" name="campus" required>
                         {% for campus in campuses %}
                         <option value="{{ campus }}">{{ campus }}</option>
                         {% endfor %}
@@ -144,7 +143,7 @@
                 </div>
 
                 <!-- SUBMIT -->
-                <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto rounded-0 mt-5" name="register"
+                <input type="submit" class="btn btn-warning d-block px-4 py-2 mx-auto mt-5" name="register"
                     value="Sign Up">
             </form>
         </div>

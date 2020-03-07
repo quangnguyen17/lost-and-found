@@ -56,7 +56,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav text-center ml-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link btn btn-secondary text-light rounded-0 px-3" href="/home/logout">Log Out</a>
+                    <a class="nav-link btn btn-secondary text-light px-3" href="/home/logout">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -68,7 +68,7 @@
                 <ul class="list-inline m-0 p-5">
                     <li class="list-inline-item m-0 p-0 align-middle">
                         <a class="m-0 p-0" href="/home/profile/{{ user.id }}">
-                            <img class="rounded-circle border border-light" width="175" height="175"
+                            <img class="rounded-circle border border-light" width="100" height="100"
                                 src="{{ user.profile_image.url }}" alt="profile_image">
                         </a>
                     </li>
@@ -77,27 +77,23 @@
                         <p class="text-secondary">({{ user.level }})</p>
                         <p class="m-0">Coding Dojo ({{ user.campus }})</p>
                     </li>
-                    <li class="list-inline-item m-0 p-3 text-center align-middle">
-                        <p>I have:</p>
+                    <li class="list-inline-item m-0 p-3 text-center align-items-center align-middle">
                         <ul class="list-inline">
-                            <li class="list-inline-item">
+                            <li class="text-center m-0">I have</li>
+                            <li class="list-inline-item my-2">
                                 <ul class="list-inline text-center">
-                                    <li>
-                                        <h1 class="m-0 font-weight-bold">
-                                            {{ items|missing|at_campus:user.campus|mine:user|length }}
-                                        </h1>
+                                    <li class="my-2 display-4">
+                                        {{ items|missing|at_campus:user.campus|mine:user|length }}
                                     </li>
-                                    <li class="text-danger">#missing</li>
+                                    <li class="text-danger">Lost</li>
                                 </ul>
                             </li>
                             <li class="list-inline-item">
                                 <ul class="list-inline text-center">
-                                    <li>
-                                        <h1 class="m-0 font-weight-bold">
-                                            {{ items|found|at_campus:user.campus|mine:user|length }}
-                                        </h1>
+                                    <li class="my-2 display-4">
+                                        {{ items|found|at_campus:user.campus|mine:user|length }}
                                     </li>
-                                    <li class="text-success">#found</li>
+                                    <li class="text-success">Found</li>
                                 </ul>
                             </li>
                         </ul>
@@ -132,7 +128,7 @@
         <div class="row p-0 m-0 text-center">
             <ul class="list-inline m-0 p-2 d-block mx-auto">
                 <li class="list-inline-item m-2">
-                    <a class="btn btn-lg btn-warning rounded-0 px-3 py-2 m-0"
+                    <a class="btn btn-lg btn-warning px-3 py-2 m-0"
                         href="{% if keyword != None %} add {% else %} /home/add {% endif %}">
                         <span class="mr-1">[&#43;]</span>
                         <span>Add Item</span>
@@ -141,9 +137,9 @@
                 <li class="list-inline-item m-2">
                     <span class="mr-2">Showing: </span>
                     <div class="btn-group m-0" role="group" aria-label="">
-                        <button id="lost-btn" type="button" class="btn btn-light active rounded-0 type">#missing
+                        <button id="lost-btn" type="button" class="btn btn-light text-danger active type">Lost
                             ({{ items|missing|at_campus:user.campus|length }})</button>
-                        <button id="found-btn" type="button" class="btn btn-light rounded-0 type">#found
+                        <button id="found-btn" type="button" class="btn btn-light text-success type">Found
                             ({{ items|found|at_campus:user.campus|length }})</button>
                     </div>
                 </li>
@@ -174,7 +170,7 @@
                         </li>
                     </ul>
                     <div class="image-box mb-2"
-                        style="background-image: linear-gradient(rgba(0, 0, 0, 0), black), url({{ item.image.url }});">
+                        style="background-image: linear-gradient(rgba(0, 0, 0, 0), black), url({{ item.image.url }}); border-radius: 12px;">
                         <div class="content text-light">
                             <div class="bottom-left">
                                 <h4 class="text-danger m-0">#missing</h4>
@@ -218,7 +214,7 @@
                         </li>
                     </ul>
                     <div class="image-box mb-2"
-                        style="background-image: linear-gradient(rgba(0, 0, 0, 0), black), url({{ item.image.url }});">
+                        style="background-image: linear-gradient(rgba(0, 0, 0, 0), black), url({{ item.image.url }}); border-radius: 12px;">
                         <div class="content text-light">
                             <ul class="list-inline bottom-left m-0 p-0">
                                 <a class="m-0 p-0 text-light" href="/home/profile/{{ item.owner.id }}"

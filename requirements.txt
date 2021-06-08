@@ -10,7 +10,7 @@ django-compressor==2.4
 django-static-precompiler==1.8.2
 django-unused-media==0.1.13
 libsass==0.19.4
-Pillow==7.0.0
+Pillow==8.2.0
 pycodestyle==2.5.0
 pycparser==2.19
 pytz==2019.3
